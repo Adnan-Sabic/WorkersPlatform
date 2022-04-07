@@ -1,0 +1,12 @@
+Razvijanje sistema za lakše uspostavljanje komunikacije, dogovaranje poslova
+između ljudi koji nude određene usluge (izdavači usluga, npr zanatlije) i potražioca usluga (npr čovjek koji traži vodoinstalatera).
+Početna stranica bi se sastojala od prijave/registracije od koje dalje ovisi izgled aplikacije.
+Potražioci usluga bi imali aplikaciju u kojoj mogu postaviti svoje zahtjeve,
+vidjeti dostupne izdavače usluga(detaljnje informacije o njima: profil, dojmove, završene poslove...),
+filtrirati ih (određene kategorije npr vodoinstalateri, električari...),
+poslati im poruku, ostaviti dojam nakon završenog posla, uređivati svoj profil...
+Izdavači usluga bi imali opcije pregleda svih zahtjeva, mogućnost njihove pretrage, filtriranja,
+slanje poruke potražiocu usluga...
+
+Rezimirano, aplikacija slična današnjem olx-u čija se funkcionalnost fokusira
+na lakše ugovaranje poslova između potražioca i izdavača usluga.
