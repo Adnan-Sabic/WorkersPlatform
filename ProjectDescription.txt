@@ -10,3 +10,9 @@ slanje poruke potražiocu usluga...
 
 Rezimirano, aplikacija slična današnjem olx-u čija se funkcionalnost fokusira
 na lakše ugovaranje poslova između potražioca i izdavača usluga.
+
+
+Tehnicke stvari:
+Baza: MongoDB
+Backend: Spring boot
+Frontend: React
