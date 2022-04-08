@@ -1,4 +1,4 @@
-package com.platformBackend.model.entity;
+package com.platformBackend.model.entity.additional;
 
 import lombok.Data;
 import org.bson.types.ObjectId;

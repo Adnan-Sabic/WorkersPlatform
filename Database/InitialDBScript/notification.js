@@ -1,2 +1,0 @@
-
-db.createCollection( 'notification', {validator: {$jsonSchema: {bsonType: 'object',title:'notification',required: [         'userId',          'text',          'date',          'seen'],properties: {userId: {bsonType: 'objectId'},text: {bsonType: 'string'},date: {bsonType: 'timestamp'},seen: {bsonType: 'bool'}}         }      }});  

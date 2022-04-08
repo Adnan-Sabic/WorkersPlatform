@@ -1,0 +1,3 @@
+//MongoDB Database Tools package needs to be installed and add to env to use this commands
+mongodump -d <database_name> -o <target_directory>  //create dump of your local db
+mongorestore --db <database_name> <path_to_bson_files> //restore db locally
