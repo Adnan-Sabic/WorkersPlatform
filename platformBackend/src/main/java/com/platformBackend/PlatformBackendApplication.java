@@ -1,20 +1,11 @@
 package com.platformBackend;
 
-import com.platformBackend.model.entity.Advertisement;
-import com.platformBackend.model.entity.Message;
-import com.platformBackend.model.entity.Notification;
-import com.platformBackend.model.entity.additional.Type;
 import com.platformBackend.repository.*;
-import org.bson.types.ObjectId;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
 @EnableMongoAuditing
@@ -27,7 +18,7 @@ public class PlatformBackendApplication {
     @Bean
     CommandLineRunner runner(UserRepository userRepository, CityRepository cityRepository, NotificationRepository notificationRepository, CategoryRepository categoryRepository, AdvertisementRepository advertisementRepository, MessageRepository messageRepository) {
         return args -> {
-            System.out.println(notificationRepository.findAll());
+//            System.out.println(advertisementRepository.findAll());
 //            Address address = new Address(new ObjectId(), "Marka Markovica 8");
 //            User user = new User(
 //                    "Marko",
@@ -65,8 +56,8 @@ public class PlatformBackendApplication {
 //                add(City.builder().name("Doboj").build());
 //                add(City.builder().name("Trebinje").build());
 //            } };
-//            System.out.println(list);
 //            cityRepository.insert(list);
+
 //            List<Notification> notificationList = new ArrayList<>() {{
 //                add(Notification.builder().userId(new ObjectId("62503a0a7eb6670166ad65d1")).text("Imate novu poruku 1.").build());
 //                add(Notification.builder().userId(new ObjectId("62503a0a7eb6670166ad65d1")).text("Imate novu poruku 2.").build());

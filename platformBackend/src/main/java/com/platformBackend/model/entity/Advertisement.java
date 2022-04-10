@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,7 +20,11 @@ public class Advertisement {
     @Id
     private ObjectId _id;
     private ObjectId userId;
+    @DocumentReference(lazy = true, collection = "user", lookup = "{'userId' : ?#{#_id}}")
+    private User user;
     private ObjectId categoryId;
+    @DocumentReference(lazy = true, collection = "category", lookup = "{'categoryId' : ?#{#_id}}")
+    private Category category;
     private Type type;
     @CreatedDate
     private LocalDateTime created;

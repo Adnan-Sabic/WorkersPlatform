@@ -13,12 +13,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
 @Data
+@Builder
 @Document
 public class User {
     @Id
     private ObjectId _id;
     @CreatedDate
     private LocalDateTime created;
+    @Builder.Default
     private Role role = Role.NORMAL;
     private String firstName;
     private String lastName;
@@ -29,16 +31,6 @@ public class User {
     private String about;
     private String image;
     private Address address;
+    @Builder.Default
     private Boolean isActive = true;
-
-    public User(String firstName, String lastName, String contactNumber, String email, String password, String about, String image, Address address) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.contactNumber = contactNumber;
-        this.email = email;
-        this.password = password;
-        this.about = about;
-        this.image = image;
-        this.address = address;
-    }
 }

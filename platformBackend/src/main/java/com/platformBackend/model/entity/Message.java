@@ -6,6 +6,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.time.LocalDateTime;
 
@@ -16,7 +17,11 @@ public class Message {
     @Id
     private ObjectId _id;
     private ObjectId senderId;
+    @DocumentReference(lazy = true, collection = "user", lookup = "{'senderId' : ?#{#_id}}")
+    private User sender;
     private ObjectId receiverId;
+    @DocumentReference(lazy = true, collection = "user", lookup = "{'receiverId' : ?#{#_id}}")
+    private User receiver;
     @CreatedDate
     private LocalDateTime created;
     @Builder.Default
