@@ -1,11 +1,20 @@
 package com.platformBackend;
 
+import com.platformBackend.model.entity.Advertisement;
+import com.platformBackend.model.entity.Message;
+import com.platformBackend.model.entity.Notification;
+import com.platformBackend.model.entity.additional.Type;
 import com.platformBackend.repository.*;
+import org.bson.types.ObjectId;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 @EnableMongoAuditing
@@ -18,6 +27,7 @@ public class PlatformBackendApplication {
     @Bean
     CommandLineRunner runner(UserRepository userRepository, CityRepository cityRepository, NotificationRepository notificationRepository, CategoryRepository categoryRepository, AdvertisementRepository advertisementRepository, MessageRepository messageRepository) {
         return args -> {
+            System.out.println(notificationRepository.findAll());
 //            Address address = new Address(new ObjectId(), "Marka Markovica 8");
 //            User user = new User(
 //                    "Marko",

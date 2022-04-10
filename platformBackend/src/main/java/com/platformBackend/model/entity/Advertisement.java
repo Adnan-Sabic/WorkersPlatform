@@ -27,5 +27,6 @@ public class Advertisement {
     private String description;
     private List<String> images;
     private BigDecimal price;
+    @Builder.Default
     private Boolean isActive = true;
 }

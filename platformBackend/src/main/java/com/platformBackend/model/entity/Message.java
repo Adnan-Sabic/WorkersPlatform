@@ -19,6 +19,7 @@ public class Message {
     private ObjectId receiverId;
     @CreatedDate
     private LocalDateTime created;
+    @Builder.Default
     private Boolean seen = false;
     private String text;
 }
