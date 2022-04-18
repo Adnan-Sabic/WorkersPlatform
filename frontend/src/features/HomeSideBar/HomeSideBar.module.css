@@ -1,0 +1,9 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--light-primary-color);
+    color: var(--black-text-color);
+    min-width: 30rem;
+    align-items: center;
+    justify-content: space-around;
+}

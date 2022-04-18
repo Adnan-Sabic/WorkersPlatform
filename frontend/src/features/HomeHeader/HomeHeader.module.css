@@ -1,0 +1,11 @@
+.mainContainer {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    align-items: center;
+    background-color: var(--dark-primary-color);
+    color: var(--primary-text-color);
+    min-height: 7rem;
+    font-size: 2em;
+}

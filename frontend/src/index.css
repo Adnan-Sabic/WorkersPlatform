@@ -1,4 +1,21 @@
 body {
   margin: 0;
-  overflow: hidden;
+}
+
+:root {
+  --primary-color: #03A9F4;
+  --dark-primary-color: #0288D1;
+  --light-primary-color: #B3E5FC;
+  --secondary-color: #607D8B;
+
+  --primary-text-color: #FFFFFF;
+  --secondary-text-color: #ffffff;
+  --black-text-color: #000000;
+  --divider-color: #BDBDBD;
+}
+[data-theme='dark'] {
+  /* --background: black;
+  --text-primary: white;
+  --text-secondary: grey;
+  --accent: darkred; */
 }
