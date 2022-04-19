@@ -1,5 +1,6 @@
 import React from "react";
-
+import Logo from "../../components/Logo/Logo";
+import { ReactComponent as LogoImage } from "../../assets/logo.svg";
 import styles from "./HomeHeader.module.css";
 
 const HomeHeader = () => {
@@ -7,7 +8,7 @@ const HomeHeader = () => {
 
   return (
     <div className={styles.mainContainer}>
-      <div>Logo</div>
+      <Logo image={LogoImage} text="Majstori" redirectPath="/home"></Logo>
       <div>Middle Part?</div>
       <div>Icons</div>
     </div>

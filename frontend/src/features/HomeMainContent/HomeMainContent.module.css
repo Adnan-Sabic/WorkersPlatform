@@ -11,8 +11,8 @@
     justify-content: space-around;
     align-items: center;
     min-height: 4rem;
-    background-color: var(--secondary-color);
-    color: var(--secondary-text-color);
+    background-color: var(--black-color);
+    color: var(--white-color);
 }
 
 .contentContainer {

@@ -1,17 +1,27 @@
+@font-face {
+  font-family: 'RobotoRegular';
+  src: local('Roboto'), url(./fonts/Roboto/Roboto-Regular.ttf) format('opentype');
+}
+@font-face {
+  font-family: 'RobotoBlack';
+  src: local('Roboto'), url(./fonts/Roboto/Roboto-Black.ttf) format('opentype');
+}
+
+
+
 body {
+  font-family: 'RobotoRegular', sans-serif;
   margin: 0;
 }
 
 :root {
-  --primary-color: #03A9F4;
-  --dark-primary-color: #0288D1;
-  --light-primary-color: #B3E5FC;
-  --secondary-color: #607D8B;
+  --primary-color: #0075B7;
+  --dark-primary-color: #005180;
+  --light-primary-color: #19ABFF;
+  --secondary-color: #e07800;
 
-  --primary-text-color: #FFFFFF;
-  --secondary-text-color: #ffffff;
-  --black-text-color: #000000;
-  --divider-color: #BDBDBD;
+  --white-color: #FFFFFF;
+  --black-color: #000000;
 }
 [data-theme='dark'] {
   /* --background: black;
