@@ -9,3 +9,13 @@
     min-height: 7rem;
     font-size: 2em;
 }
+
+.rowContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.marginRight {
+    margin-right: 2rem;
+}
+

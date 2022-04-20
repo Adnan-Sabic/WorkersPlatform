@@ -11,6 +11,7 @@
 
 body {
   font-family: 'RobotoRegular', sans-serif;
+  /* overflow: hidden; */
   margin: 0;
 }
 
@@ -18,7 +19,7 @@ body {
   --primary-color: #0075B7;
   --dark-primary-color: #005180;
   --light-primary-color: #19ABFF;
-  --secondary-color: #e07800;
+  --secondary-color: #d37203;
 
   --white-color: #FFFFFF;
   --black-color: #000000;

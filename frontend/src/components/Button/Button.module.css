@@ -1,0 +1,29 @@
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 1rem;
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    cursor: pointer;
+    
+    height: 3rem;
+    width: 12rem;
+    font-size: 1.3rem;
+    transition: all 0.5s;
+    /* border: solid 2px rgb(255, 253, 253); */
+}
+
+.mainContainer:hover {
+    background-color: var(--secondary-color);
+    filter: brightness(130%);
+}
+
+
+.mainContainer > ion-icon {
+    font-size: 1.75rem;
+    color: white;
+    padding-right: 0.8rem;
+    border-right: 0.125rem solid white;
+}

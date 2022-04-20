@@ -13,7 +13,7 @@
     font-family: RobotoBlack;
     color: var(--secondary-color);
     font-weight: 600;
-    letter-spacing: 1rem;
+    letter-spacing: 0.7rem;
     font-size: 3.5rem;
     padding-left: 1.5rem;
 }

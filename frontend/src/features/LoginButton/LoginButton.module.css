@@ -1,0 +1,28 @@
+.modalPosition {
+    /* position: absolute !important;
+    margin: 0 !important;
+    top: 8%;
+    bottom: 0;
+    right: 14%; */
+    width: 26rem !important;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.confirmButton {
+    width: 77%;
+    height: 3rem;
+    align-self: flex-end;
+}
+
+.modalPosition > div {
+    border-radius: 10px !important;
+}
+
+/* .modalPosition div.ant-modal-body{
+    padding: 50px !important;
+    background-color: aliceblue;
+} */
