@@ -10,10 +10,7 @@ const HomePage = () => {
   return (
     <div className={styles.mainContainer}>
       <HomeHeader></HomeHeader>
-      <div className={styles.contentContainer}>
-        <HomeSideBar></HomeSideBar>
-        <HomeMainContent></HomeMainContent>
-      </div>
+      <HomeMainContent></HomeMainContent>
       <HomeFooter></HomeFooter>
     </div>
   );

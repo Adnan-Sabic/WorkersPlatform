@@ -4,5 +4,6 @@
     justify-content: center;
     background-color: var(--dark-primary-color);
     color: var(--white-color);
+    min-height: 1rem;
     width: 100%;
 }

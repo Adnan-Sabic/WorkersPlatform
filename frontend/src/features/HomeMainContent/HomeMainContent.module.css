@@ -1,8 +1,11 @@
 .mainContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     height: 100%;
+    overflow: hidden;
+    background-color: var(--light-primary-color);
+    overflow: auto;
 }
 
 .header {
@@ -11,14 +14,51 @@
     justify-content: space-around;
     align-items: center;
     min-height: 4rem;
-    background-color: var(--black-color);
-    color: var(--white-color);
+    background-color: var(--gray-dark);
+    color: var(--black-color);
 }
 
 .contentContainer {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
+    width: 100%;
 }
+
+.cardContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.3rem;
+    grid-template-rows: repeat(3, 1fr);
+    height: 100%;
+    padding: 1rem;
+    overflow-y: auto;
+    
+}
+
+.paginator {
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    align-self: center;
+}
+
+
+.search {
+    width: 70%;
+}
+
+@media screen and (max-width: 1500px) {
+    .mainContainer {
+        display: flex;
+        flex-direction: column;
+    }
+    .cardContainer {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.3rem;
+        grid-template-rows: repeat(6, 1fr);
+        height: 100%;
+        padding: 1rem;
+        overflow-y: auto;
+        
+    }
+  }

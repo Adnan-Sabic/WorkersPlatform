@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("advertisements")
+@RequestMapping("api/advertisements")
 @CrossOrigin(origins = "*")
 public class AdvertisementController {
     private final AdvertisementService advertisementService;
@@ -23,7 +23,6 @@ public class AdvertisementController {
 
     @GetMapping
     public List<AdvertisementResponse> findAll() {
-        System.out.println(advertisementService.findAll());
         return advertisementService.findAll();
     }
 }
