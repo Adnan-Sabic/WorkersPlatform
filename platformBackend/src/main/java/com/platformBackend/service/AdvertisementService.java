@@ -32,7 +32,6 @@ public class AdvertisementService {
             query.addCriteria(Criteria.where("type").is(type));
         }
         query.with(pageable);
-        mongoTemplate.co
         return mongoTemplate.find(query, Advertisement.class)
                 .stream()
                 .map(advertisement -> modelMapper.map(advertisement, AdvertisementResponse.class))
