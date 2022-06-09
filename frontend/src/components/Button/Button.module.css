@@ -16,14 +16,21 @@
 }
 
 .mainContainer:hover {
+    color: var(--black-color);
     background-color: var(--secondary-color);
-    filter: brightness(130%);
+    filter: brightness(135%);
 }
 
 
 .mainContainer > ion-icon {
+    transition: all 0.5s;
     font-size: 1.75rem;
     color: white;
-    padding-right: 0.8rem;
+    padding-right: 1rem;
     border-right: 0.125rem solid white;
+}
+
+.mainContainer:hover > ion-icon {
+    color: var(--black-color);
+    border-right-color: var(--black-color);
 }

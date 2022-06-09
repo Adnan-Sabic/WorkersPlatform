@@ -100,7 +100,7 @@ public class PlatformBackendApplication {
 ////            categoryRepository.insert(categoryList);
 //
 //
-////            List<Advertisement> advertisementList = new ArrayList<>(){{
+////            List<Advertisement> advertisementList = new ArrayList<>() {{
 ////                add(Advertisement.builder()
 ////                        .userId(new ObjectId("62503a0a7eb6670166ad65d1"))
 ////                        .categoryId(new ObjectId("62504d089c5b8449a91d611e"))
@@ -137,6 +137,18 @@ public class PlatformBackendApplication {
 ////                        }})
 ////                        .price(null)
 ////                        .build());
+////                add(Advertisement.builder()
+////                        .userId(new ObjectId("62503a0a7eb6670166ad65d1"))
+////                        .categoryId(new ObjectId("62504d089c5b8449a91d6122"))
+////                        .type(Type.OFFER)
+////                        .name("Staklarske usluge Cazin")
+////                        .description("Od malih kucanskih staklenih proizvoda do velik prozora za zgrade")
+////                        .images(new ArrayList<String>() {{
+////                            add("url6");
+////                            add("url7");
+////                        }})
+////                        .price(null)
+////                        .build());
 ////
 ////                add(Advertisement.builder()
 ////                        .userId(new ObjectId("62503a0a7eb6670166ad65d3"))
@@ -168,6 +180,17 @@ public class PlatformBackendApplication {
 ////                        .name("Potreban kovač Konjic")
 ////                        .description("Potreban mi je kovač da mi napravi mač sinu za rodjendan")
 ////                        .images(new ArrayList<String>(){{
+////                            add("url6");
+////                        }})
+////                        .price(null)
+////                        .build());
+////                add(Advertisement.builder()
+////                        .userId(new ObjectId("62503a0a7eb6670166ad65d3"))
+////                        .categoryId(new ObjectId("62504d089c5b8449a91d6122"))
+////                        .type(Type.DEMAND)
+////                        .name("Potreban staklar Cazin")
+////                        .description("Potreban mi je staklar da mi napravi stalaže u frizideru.")
+////                        .images(new ArrayList<String>() {{
 ////                            add("url6");
 ////                        }})
 ////                        .price(null)

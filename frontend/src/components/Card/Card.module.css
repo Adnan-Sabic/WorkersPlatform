@@ -30,14 +30,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-
-.titleContainer {
-    margin-top: 14px;
-}
-
-.userInfoContainer {
-    margin-top: -4px;
+    margin-top: 5px;
 }
 
 .title {
@@ -51,26 +44,33 @@
    -webkit-line-clamp: 2; /* number of lines to show */
 }
 
-.type, .category, .price, .userName {
+.typeOffer, .typeDemand, .category, .price, .userName {
     font-size: 1.2rem;
 }
 
-.type {
-    background-color: green;
+.typeOffer, .typeDemand {
     text-align: center;
     border-radius: 1rem;
     width: 50%;
     color: var(--white-color);
 }
 
+.typeOffer {
+    background-color: green;
+}
+
+.typeDemand {
+    background-color: red;
+}
+
 .category {
-    text-align: center;
+    text-align: left;
+    padding-left: 10%;
     width: 50%;
 }
 
 .price {
-    margin-top: 5px;
-    width: 100%;
+    width: 50%;
 }
 
 .userName {

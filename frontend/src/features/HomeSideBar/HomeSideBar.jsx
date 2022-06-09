@@ -1,6 +1,7 @@
 import { Form, Radio, Select, Spin } from "antd";
 import React from "react";
 import { useQuery } from "react-query";
+import { findAllAdvertisements } from "../../api/advertisementApi";
 import { findAllCategories } from "../../api/categoriesApi";
 import { findAllCities } from "../../api/cityApi";
 import Button from "../../components/Button/Button";
@@ -9,10 +10,8 @@ import styles from "./HomeSideBar.module.css";
 
 const { Option } = Select;
 
-const HomeSideBar = () => {
+const HomeSideBar = ({ form, handleRefresh }) => {
   console.log("SideBar");
-  const request = findAllCities();
-  console.log("adooooooooooooo", request);
 
   const { data: cities, isLoading: isLoadingCities } = useQuery(
     "cities",
@@ -28,9 +27,8 @@ const HomeSideBar = () => {
     findAllCategories
   );
 
-  console.log("dataaaaa", cities?.data);
+  // console.log("dataaaaa", cities?.data);
 
-  const [form] = Form.useForm();
   return (
     <div className={styles.mainContainer}>
       <div className={styles.headerText}>Filteri</div>
@@ -40,19 +38,19 @@ const HomeSideBar = () => {
         className={styles.form}
         form={form}
         layout="vertical"
+        initialValues={{ type: ADVERTISEMENT_TYPE_OPTIONS[0].value }}
       >
         <Form.Item label="Tip oglasa" name="type">
           <Radio.Group
             options={ADVERTISEMENT_TYPE_OPTIONS}
             size="large"
             className={styles.radioGruopType}
-            // defaultValue={ADVERTISEMENT_TYPE_OPTIONS[0].value}
             optionType="button"
             buttonStyle="solid"
           />
         </Form.Item>
 
-        <Form.Item label="Kategorija" name="category">
+        <Form.Item label="Kategorija" name="categoryId">
           <Select
             size="large"
             showSearch
@@ -78,7 +76,7 @@ const HomeSideBar = () => {
           </Select>
         </Form.Item>
 
-        <Form.Item label="Grad" name="city">
+        <Form.Item label="Grad" name="cityId">
           <Select
             size="large"
             showSearch
@@ -107,7 +105,7 @@ const HomeSideBar = () => {
         <Button
           text="Osvježi rezultate"
           className={styles.sumbitButton}
-          // onClick={handleLogin}
+          onClick={handleRefresh}
         ></Button>
       </Form>
     </div>

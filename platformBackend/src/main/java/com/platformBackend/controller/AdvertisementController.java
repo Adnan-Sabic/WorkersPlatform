@@ -1,12 +1,12 @@
 package com.platformBackend.controller;
 
+import com.platformBackend.model.entity.additional.Type;
 import com.platformBackend.model.response.AdvertisementResponse;
 import com.platformBackend.service.AdvertisementService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +22,13 @@ public class AdvertisementController {
     }
 
     @GetMapping
-    public List<AdvertisementResponse> findAll() {
-        return advertisementService.findAll();
+    @ResponseBody
+    public List<AdvertisementResponse> findAll(
+            @RequestParam(required = false) Type type,
+            @RequestParam(required = false) ObjectId categoryId,
+            @RequestParam(required = false) ObjectId cityId,
+            @RequestParam(required = false, defaultValue = "") String title,
+            Pageable pageable) {
+        return advertisementService.findAll(pageable, type, categoryId, cityId, title);
     }
 }

@@ -2,6 +2,6 @@ import { request } from "./axiosUtils";
 
 const ADVERTISEMENTS_ENDPOINT = "advertisements";
 
-export const getAllAdvertisements = () => {
-  // return apiClient.get(ADVERTISEMENTS_ENDPOINT);
+export const findAllAdvertisements = (params = {}) => {
+  return request({ url: ADVERTISEMENTS_ENDPOINT, params: params });
 };

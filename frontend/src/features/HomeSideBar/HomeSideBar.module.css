@@ -10,13 +10,16 @@
 }
 
 .headerText {
+    min-height: 4rem;
     height: 4rem;
     font-size: 3rem;
-    letter-spacing: 1rem;
+    letter-spacing: 1.6rem;
     font-weight: 900;
     width: 100%;
-    text-align: center;
     background-color: var(--gray-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .radioGruopType {

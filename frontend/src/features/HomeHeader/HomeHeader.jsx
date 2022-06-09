@@ -8,7 +8,7 @@ import LoginButton from "../LoginButton/LoginButton";
 import RegisterButton from "../RegisterButton/RegisterButton";
 
 const HomeHeader = () => {
-  console.log("ado");
+  console.log("Home Header");
   const isLoggedIn = false;
 
   return (

@@ -11,9 +11,9 @@ const client = axios.create({
 export const request = ({ ...options }) => {
   client.defaults.headers.common.Authorization = `Bearer token`;
   const onSuccess = (response) => response;
-  const onError = (error) => {
-    return error;
-  };
+  // const onError = (error) => {
+  //   return error;
+  // };
 
-  return client(options).then(onSuccess).catch(onError);
+  return client(options).then(onSuccess); //.catch(onError); commented so that react query can handle errors
 };
