@@ -1,22 +1,18 @@
 package com.platformBackend.service;
 
-import com.platformBackend.model.entity.City;
+import com.platformBackend.model.entity.CityEntity;
 import com.platformBackend.repository.CityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class CityService {
     private final CityRepository cityRepository;
 
-    @Autowired
-    public CityService(CityRepository cityRepository) {
-        this.cityRepository = cityRepository;
-    }
-
-    public List<City> findAll() {
+    public List<CityEntity> findAll() {
         return cityRepository.findAll();
     }
 }

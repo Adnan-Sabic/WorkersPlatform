@@ -1,9 +1,8 @@
 package com.platformBackend.model.response;
 
-import com.platformBackend.model.entity.City;
-import com.platformBackend.model.entity.additional.Type;
+import com.platformBackend.model.entity.CityEntity;
+import com.platformBackend.model.enums.AdvType;
 import lombok.Data;
-import org.bson.types.ObjectId;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -11,11 +10,11 @@ import java.util.List;
 
 @Data
 public class AdvertisementResponse {
-    private ObjectId _id;
+    private Integer id;
     private UserResponse userResponse;
     private CategoryResponse categoryResponse;
-    private City cityResponse;
-    private Type type;
+    private CityEntity cityResponse;
+    private AdvType type;
     private LocalDateTime created;
     private Long daysAgo;
     private String name;

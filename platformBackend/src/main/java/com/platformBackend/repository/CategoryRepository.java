@@ -1,10 +1,9 @@
 package com.platformBackend.repository;
 
-import com.platformBackend.model.entity.Category;
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import com.platformBackend.model.entity.CategoryEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CategoryRepository extends MongoRepository<Category, ObjectId> {
+public interface CategoryRepository extends JpaRepository<CategoryEntity, Integer> {
 }
