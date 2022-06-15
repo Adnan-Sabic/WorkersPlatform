@@ -15,19 +15,14 @@ const HomeSideBar = ({ form, handleRefresh }) => {
 
   const { data: cities, isLoading: isLoadingCities } = useQuery(
     "cities",
-    findAllCities,
-    {
-      // retry: false,
-      // enabled: false, //when will it run Boolean(_id) when it has id it will start
-    }
+    findAllCities
   );
 
   const { data: categories, isLoading: isLoadingCategories } = useQuery(
     "categories",
     findAllCategories
   );
-
-  // console.log("dataaaaa", cities?.data);
+  
 
   return (
     <div className={styles.mainContainer}>
@@ -52,6 +47,7 @@ const HomeSideBar = ({ form, handleRefresh }) => {
 
         <Form.Item label="Kategorija" name="categoryId">
           <Select
+            allowClear
             size="large"
             showSearch
             placeholder="Izaberite kategoriju"
@@ -68,7 +64,7 @@ const HomeSideBar = ({ form, handleRefresh }) => {
               <Spin />
             ) : (
               categories?.data?.map((category) => (
-                <Option key={category._id} value={category._id}>
+                <Option key={category.id} value={category.id}>
                   {category.name}
                 </Option>
               ))
@@ -78,6 +74,7 @@ const HomeSideBar = ({ form, handleRefresh }) => {
 
         <Form.Item label="Grad" name="cityId">
           <Select
+            allowClear
             size="large"
             showSearch
             placeholder="Izaberite grad"
@@ -94,7 +91,7 @@ const HomeSideBar = ({ form, handleRefresh }) => {
               <Spin />
             ) : (
               cities?.data?.map((city) => (
-                <Option key={city._id} value={city._id}>
+                <Option key={city.id} value={city.id}>
                   {city.name}
                 </Option>
               ))

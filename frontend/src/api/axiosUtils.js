@@ -14,6 +14,5 @@ export const request = ({ ...options }) => {
   // const onError = (error) => {
   //   return error;
   // };
-
   return client(options).then(onSuccess); //.catch(onError); commented so that react query can handle errors
 };

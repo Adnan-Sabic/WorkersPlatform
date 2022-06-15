@@ -1,6 +1,5 @@
 package com.platformBackend.model.response;
 
-import com.platformBackend.model.entity.CityEntity;
 import com.platformBackend.model.enums.AdvType;
 import lombok.Data;
 
@@ -11,13 +10,13 @@ import java.util.List;
 @Data
 public class AdvertisementResponse {
     private Integer id;
-    private UserResponse userResponse;
-    private CategoryResponse categoryResponse;
-    private CityEntity cityResponse;
+    private UserResponse user;
+    private String categoryName;
+    private String cityName;
     private AdvType type;
     private LocalDateTime created;
     private Long daysAgo;
-    private String name;
+    private String title;
     private String description;
     private List<String> images;
     private BigDecimal price;

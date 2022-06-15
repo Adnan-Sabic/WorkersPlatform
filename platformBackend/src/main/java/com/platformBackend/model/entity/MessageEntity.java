@@ -1,6 +1,5 @@
 package com.platformBackend.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,14 +14,12 @@ public class MessageEntity {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "senderId", nullable = false)
-    @JsonIgnore
     private UserEntity sender;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "receiverId", nullable = false)
-    @JsonIgnore
     private UserEntity receiver;
 
     @Column(name = "created", nullable = false)

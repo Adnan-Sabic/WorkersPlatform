@@ -1,9 +1,10 @@
 package com.platformBackend.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.platformBackend.model.enums.AdvType;
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.Data;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,20 +13,19 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "advertisement")
+@TypeDef(name = "json", typeClass = JsonStringType.class)
 public class AdvertisementEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "userId", nullable = false)
-    @JsonIgnore
     private UserEntity user;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "categoryId", nullable = false)
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "categoryId", nullable = false, updatable = false, insertable = false)
     private CategoryEntity category;
 
     @Enumerated(EnumType.STRING)
@@ -50,7 +50,7 @@ public class AdvertisementEntity {
     @Column(name = "removedBecause", length = 500)
     private String removedBecause;
 
-    @Type( type = "json" )
+    @Type(type = "json")
     @Column(columnDefinition = "json", name = "imagesUrls", nullable = false)
     private String[] imagesUrls;
 

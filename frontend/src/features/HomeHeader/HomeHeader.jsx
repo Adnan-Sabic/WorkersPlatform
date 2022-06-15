@@ -1,7 +1,6 @@
 import React from "react";
 import Logo from "../../components/Logo/Logo";
 import { ReactComponent as LogoImage } from "../../assets/logo.svg";
-import { Form, Input, Button as Buttoon, Checkbox } from "antd";
 import Button from "../../components/Button/Button";
 import styles from "./HomeHeader.module.css";
 import LoginButton from "../LoginButton/LoginButton";

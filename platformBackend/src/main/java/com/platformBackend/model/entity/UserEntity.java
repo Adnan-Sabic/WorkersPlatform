@@ -1,6 +1,5 @@
 package com.platformBackend.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.platformBackend.model.enums.Role;
 import lombok.Data;
 
@@ -17,15 +16,14 @@ public class UserEntity {
     private Integer id;
 
     @Column(name = "created", nullable = false)
-    private LocalDateTime created;
+    private LocalDateTime created = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, columnDefinition = "ENUM('NORMAL', 'ADMIN')")
-    private Role role;
+    private Role role = Role.NORMAL;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cityId")
-    @JsonIgnore
     private CityEntity city;
 
     @Column(name = "firstName", length = 45)
