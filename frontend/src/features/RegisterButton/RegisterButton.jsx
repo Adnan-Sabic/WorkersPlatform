@@ -3,7 +3,7 @@ import Modal from "antd/lib/modal/Modal";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
 import { registerUser } from "../../api/userApi";
-import succesfulGif from "../../assets/succesfulRegistration.gif";
+import successfulGif from "../../assets/succesfulRegistration.gif";
 import Button from "../../components/Button/Button";
 import {
   CONFIRM_PASSWORD_RULES,
