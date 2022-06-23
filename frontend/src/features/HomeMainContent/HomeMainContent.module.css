@@ -35,6 +35,17 @@
     
 }
 
+.noDataMessage {
+    display: flex;
+    width: 50%;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 5rem;
+}
+
 .paginator {
     padding-top: 0.2rem;
     padding-bottom: 0.2rem;

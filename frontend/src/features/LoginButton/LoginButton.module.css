@@ -14,8 +14,9 @@
 
 .confirmButton {
     width: 77%;
-    height: 3rem;
-    align-self: flex-end;
+    height: 3rem;    
+    align-self: center;
+    margin-top: 1rem;
 }
 
 .modalPosition > div {

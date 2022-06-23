@@ -32,8 +32,6 @@ const RegisterButton = ({ className }) => {
     },
   });
 
-  form.resetFields();
-
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -72,7 +70,7 @@ const RegisterButton = ({ className }) => {
           bodyStyle={MODAL_BODY_STYLE}
           // mask={false}
         >
-          <img src={successfulGif} alt="gif" className={styles.succesfulGif} />
+          <img src={successfulGif} alt="gif" className={styles.successfulGif} />
           <div className={styles.successfulText}>Uspješna registracija.</div>
         </Modal>
       </>

@@ -1,18 +1,34 @@
-import { Form, Input } from "antd";
-import Modal from "antd/lib/modal/Modal";
+import { Form, Input, Modal } from "antd";
 import React, { useState } from "react";
+import { useMutation } from "react-query";
+import { useDispatch } from "react-redux";
+import { login } from "../../api/authApi";
 import Button from "../../components/Button/Button";
+import { PASSWORD_RULES, TOKEN_KEY, USERNAME_RULES } from "../../constants";
+import { loginUser } from "../../redux/slices/userSlice";
+import { saveToLocalStorage } from "../../util/localStorageUtil";
 import styles from "./LoginButton.module.css";
 
 const MODAL_BODY_STYLE = {
-  paddingTop: "3.5rem",
-  borderRadius: "2rem",
+  // paddingTop: "3.5rem",
+  // borderRadius: "2rem",
 };
 
-const LoginButton = ({ className }) => {
+const LoginButton = ({ className, setLoggedIn }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
-  form.resetFields();
+  const dispatch = useDispatch();
+
+  const { mutate, isLoading } = useMutation(login, {
+    onSuccess: (data) => {
+      saveToLocalStorage(TOKEN_KEY, data.data.accessToken);
+      dispatch(loginUser());
+      setIsModalVisible(false);
+    },
+    onError: () => {
+      alert("there was an error");
+    },
+  });
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -24,7 +40,10 @@ const LoginButton = ({ className }) => {
 
   const handleLogin = () => {
     form.validateFields().then(
-      () => console.log(form.getFieldsValue()),
+      () => {
+        console.log(form.getFieldsValue());
+        mutate(form.getFieldsValue());
+      },
       () => console.log("Nije uspio")
     );
   };
@@ -37,6 +56,7 @@ const LoginButton = ({ className }) => {
         onClick={showModal}
       ></Button>
       <Modal
+        title="Prijava"
         transitionName=""
         visible={isModalVisible}
         footer={null}
@@ -50,36 +70,25 @@ const LoginButton = ({ className }) => {
           autoComplete="off"
           className={styles.form}
           form={form}
+          layout="vertical"
+          onFinish={handleLogin}
         >
           <Form.Item
-            label="Username"
+            label="Korisničko ime"
             name="username"
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-              },
-            ]}
+            rules={USERNAME_RULES}
           >
             <Input />
           </Form.Item>
 
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
-          >
+          <Form.Item label="Lozinka" name="password" rules={PASSWORD_RULES}>
             <Input.Password />
           </Form.Item>
           <Button
             text="Prijavi se"
             className={styles.confirmButton}
             onClick={handleLogin}
+            clickOnEnter={true}
           ></Button>
         </Form>
       </Modal>

@@ -1,4 +1,4 @@
-import { Button, Form, Pagination, Spin } from "antd";
+import { Form, Pagination, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import Card from "../../components/Card/Card";
 import HomeSideBar from "../HomeSideBar/HomeSideBar";
@@ -78,21 +78,27 @@ const HomeMainContent = () => {
           <Spin className={styles.spin} size="large"></Spin>
         ) : (
           <>
-            <div className={styles.cardContainer}>
-              {advertisements?.data?.content?.map((advertisement) => (
-                <Card
-                  key={advertisement.id}
-                  title={advertisement.title}
-                  type={advertisement.type}
-                  category={advertisement.categoryName}
-                  price={advertisement.price}
-                  city={advertisement.cityName}
-                  userName={advertisement.user.username}
-                  userNumber={advertisement.user.contactNumber}
-                  daysAgo={advertisement.daysAgo}
-                ></Card>
-              ))}
-            </div>
+            {advertisements.data.content.length !== 0 ? (
+              <div className={styles.cardContainer}>
+                {advertisements?.data?.content?.map((advertisement) => (
+                  <Card
+                    key={advertisement.id}
+                    title={advertisement.title}
+                    type={advertisement.type}
+                    category={advertisement.categoryName}
+                    price={advertisement.price}
+                    city={advertisement.cityName}
+                    userName={advertisement.user.username}
+                    userNumber={advertisement.user.contactNumber}
+                    daysAgo={advertisement.daysAgo}
+                  ></Card>
+                ))}
+              </div>
+            ) : (
+              <div className={styles.noDataMessage}>
+                Za odabrane filtere nema rezultata ☹
+              </div>
+            )}
 
             <Pagination
               className={styles.paginator}

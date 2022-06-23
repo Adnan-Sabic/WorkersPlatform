@@ -6,6 +6,9 @@ export const ADVERTISEMENT_TYPE_OPTIONS = [
   { label: "POTRAŽNJA", value: "OFFER" },
 ];
 
+//LOCAL STORAGE
+export const TOKEN_KEY = "token";
+
 //RULES FOR FORM ITEMS
 
 export const PASSWORD_RULES = [

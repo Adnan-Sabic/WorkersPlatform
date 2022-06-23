@@ -9,7 +9,7 @@ const client = axios.create({
 });
 
 export const request = ({ ...options }) => {
-  client.defaults.headers.common.Authorization = `Bearer token`;
+  // client.defaults.headers.common.Authorization = `Bearer token`;
   const onSuccess = (response) => response;
   // const onError = (error) => {
   //   return error;
