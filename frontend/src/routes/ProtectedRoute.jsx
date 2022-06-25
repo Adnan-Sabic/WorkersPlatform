@@ -1,10 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router";
 
 const ProtectedRoute = ({ redirectPath = "/home", children }) => {
-  // const isLoggedIn = useSelector((state) => state.advertiser.isLoggedIn);
-  const isLoggedIn = true;
-  if (!isLoggedIn) {
+  const loggedIn = useSelector((state) => state.user.isLoggedIn);
+  if (!loggedIn) {
     return <Navigate to={redirectPath} replace></Navigate>;
   }
   return children ? children : <Outlet />;

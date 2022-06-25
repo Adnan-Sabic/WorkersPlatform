@@ -2,6 +2,7 @@ package com.platformBackend.security;
 
 import com.platformBackend.security.filter.CustomAuthenticationFilter;
 import com.platformBackend.security.filter.CustomAuthorizationFilter;
+import com.platformBackend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -26,12 +26,12 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsService userDetailsService;
+    private final UserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 //      define what is accessible to everyone without token
         http.authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/categories", "/api/cities").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/categories", "/api/cities", "/api/minio").permitAll()
                 .regexMatchers(HttpMethod.GET, "/api/advertisements.*").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/login", "/api/users").permitAll();
 //      add need role to access

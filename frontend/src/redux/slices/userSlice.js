@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TOKEN_KEY } from "../../constants";
-import { removeFromLocalStorage } from "../../util/localStorageUtil";
+import { TOKEN_KEY, USER_ID } from "../../constants";
+import {
+  getFromLocalStorage,
+  removeFromLocalStorage,
+} from "../../util/localStorageUtil";
 
 const initialState = {
-  isLoggedIn: false,
+  isLoggedIn: getFromLocalStorage(TOKEN_KEY) ? true : false, //TODO find better solution?
 };
 
 export const userSlice = createSlice({
@@ -16,6 +19,7 @@ export const userSlice = createSlice({
     logoutUser: (state) => {
       state.isLoggedIn = false;
       removeFromLocalStorage(TOKEN_KEY);
+      removeFromLocalStorage(USER_ID);
     },
   },
 });

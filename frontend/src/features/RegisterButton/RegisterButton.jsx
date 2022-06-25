@@ -1,4 +1,4 @@
-import { Form, Input } from "antd";
+import { Form, Input, message } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
@@ -28,7 +28,7 @@ const RegisterButton = ({ className }) => {
       setSuccessfulRegistration(true);
     },
     onError: () => {
-      alert("there was an error");
+      message.error("Došlo je do greške");
     },
   });
 

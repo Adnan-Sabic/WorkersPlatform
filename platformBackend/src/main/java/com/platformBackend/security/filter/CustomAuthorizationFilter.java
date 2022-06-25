@@ -3,8 +3,10 @@ package com.platformBackend.security.filter;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.platformBackend.model.response.JwtUser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -36,6 +38,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        //TODO add open public endpoints
         if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
@@ -46,12 +49,14 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT decodedJWT = verifier.verify(token);
             String username = decodedJWT.getSubject();
+            Map<String, Claim> claims = decodedJWT.getClaims();
             String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
             for (String role : roles) {
                 authorities.add(new SimpleGrantedAuthority(role));
             }
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, null, authorities);
+            JwtUser jwtUser = JwtUser.builder().id(claims.get("userId").asInt()).username(claims.get("sub").toString()).build();
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(jwtUser, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             filterChain.doFilter(request, response);
         } catch (Exception e) {

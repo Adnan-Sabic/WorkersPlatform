@@ -27,4 +27,12 @@ public class PlatformBackendApplication {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+//    @Bean
+//    CommandLineRunner runner() {
+//        return args -> {
+//            new FileUploader().upoloadFile();
+//        };
+//    }
+
 }

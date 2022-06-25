@@ -1,5 +1,6 @@
 import axios from "axios";
-import { BACKEND_BASE_API } from "../constants";
+import { BACKEND_BASE_API, TOKEN_KEY } from "../constants";
+import { getFromLocalStorage } from "../util/localStorageUtil";
 
 const client = axios.create({
   baseURL: BACKEND_BASE_API,
@@ -9,7 +10,10 @@ const client = axios.create({
 });
 
 export const request = ({ ...options }) => {
-  // client.defaults.headers.common.Authorization = `Bearer token`;
+  const jwtToken = getFromLocalStorage(TOKEN_KEY);
+  if (jwtToken) {
+    client.defaults.headers.common.Authorization = `Bearer ${jwtToken}`;
+  }
   const onSuccess = (response) => response;
   // const onError = (error) => {
   //   return error;

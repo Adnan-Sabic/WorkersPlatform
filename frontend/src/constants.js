@@ -8,6 +8,7 @@ export const ADVERTISEMENT_TYPE_OPTIONS = [
 
 //LOCAL STORAGE
 export const TOKEN_KEY = "token";
+export const USER_ID = "userId";
 
 //RULES FOR FORM ITEMS
 
@@ -52,5 +53,24 @@ export const USERNAME_RULES = [
     required: true,
     message: "Korisničko ime nije validno. (minimalno 6 karaktera)",
     min: 6,
+  },
+];
+
+export const FIRST_NAME_RULES = [
+  {
+    max: 45,
+    message: "Broj slova ne smije biti veci od 45",
+  },
+];
+
+export const CONTACT_NUMBER = [
+  //TODO why doesen;t it work
+  // {
+  //   type: "number",
+  //   message: "Mora biti broj",
+  // },
+  {
+    max: 16,
+    message: "Broj ne smije biti duži od 16 brojeva",
   },
 ];

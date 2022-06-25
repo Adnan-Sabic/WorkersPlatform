@@ -8,9 +8,11 @@ import LoginButton from "../LoginButton/LoginButton";
 import RegisterButton from "../RegisterButton/RegisterButton";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/slices/userSlice";
+import { useNavigate } from "react-router";
 
 const HomeHeader = () => {
   console.log("Home Header");
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.user.isLoggedIn);
 
@@ -33,6 +35,7 @@ const HomeHeader = () => {
               text="Moj profil"
               icon={<ion-icon name="person-outline"></ion-icon>}
               className={styles.marginRight}
+              onClick={() => navigate("/profile")}
             ></Button>
             <Button
               text="Odjava"

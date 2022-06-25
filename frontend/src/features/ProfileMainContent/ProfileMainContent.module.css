@@ -1,0 +1,86 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: var(--light-primary-color);
+    overflow: auto;
+    /* justify-content: center; */
+    padding-top: 2rem;
+}
+
+/* .mainContainer span {
+    width: auto;
+}
+
+.mainContainer > span > div {
+    width: 22rem !important;
+    height: 26rem !important;
+} */
+
+.form {
+    width: 500px !important;
+    margin-right: 2rem;
+}
+
+.columnContainer {
+    display: flex;
+}
+
+.rowContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.rowContainer > span {
+    width: auto;
+}
+
+.rowContainer > span > div {
+    width: 22rem !important;
+    height: 26rem !important;
+}
+
+.profileHeader {
+    font-size: 4rem;
+    font-weight: 600;
+}
+
+.uploadImage {
+    height: 74.4%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.uploadButton {
+    width: 100%;
+}
+
+.uploadButton > div {
+    width: 100% !important;
+}
+
+.aboutTextArea {
+    height: 10rem;
+}
+
+.sumbitButton {
+    height: 100%;
+    width: 100%;
+    border-radius: 1rem !important;
+    margin-top: 0.5rem;
+    font-size: 1.5rem ;
+}
+
+.sumbitButtonForm {
+    height: 5rem !important;
+    margin: 0;
+}
+
+.sumbitButtonForm div {
+    height: 4rem !important;
+}
+
+.profilImageHeader {
+    padding-bottom: 0.5rem;
+}

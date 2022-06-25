@@ -74,6 +74,12 @@
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>8.4.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>

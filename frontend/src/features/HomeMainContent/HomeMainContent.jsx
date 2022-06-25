@@ -78,7 +78,7 @@ const HomeMainContent = () => {
           <Spin className={styles.spin} size="large"></Spin>
         ) : (
           <>
-            {advertisements.data.content.length !== 0 ? (
+            {advertisements?.data?.content?.length !== 0 ? (
               <div className={styles.cardContainer}>
                 {advertisements?.data?.content?.map((advertisement) => (
                   <Card

@@ -1,10 +1,15 @@
-import { Form, Input, Modal } from "antd";
+import { Form, Input, Modal, message } from "antd";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
 import { login } from "../../api/authApi";
 import Button from "../../components/Button/Button";
-import { PASSWORD_RULES, TOKEN_KEY, USERNAME_RULES } from "../../constants";
+import {
+  PASSWORD_RULES,
+  TOKEN_KEY,
+  USERNAME_RULES,
+  USER_ID,
+} from "../../constants";
 import { loginUser } from "../../redux/slices/userSlice";
 import { saveToLocalStorage } from "../../util/localStorageUtil";
 import styles from "./LoginButton.module.css";
@@ -22,11 +27,13 @@ const LoginButton = ({ className, setLoggedIn }) => {
   const { mutate, isLoading } = useMutation(login, {
     onSuccess: (data) => {
       saveToLocalStorage(TOKEN_KEY, data.data.accessToken);
+      saveToLocalStorage(USER_ID, data.data.userId);
       dispatch(loginUser());
+      message.success("Uspješno ste se prijavili");
       setIsModalVisible(false);
     },
     onError: () => {
-      alert("there was an error");
+      message.error("Došlo je do greške");
     },
   });
 

@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.platformBackend.model.request.LoginUserRequest;
+import com.platformBackend.model.response.JwtUser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,7 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -55,10 +55,13 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException {
-        User user = (User) authentication.getPrincipal();
+        JwtUser user = (JwtUser) authentication.getPrincipal();
+        Map<String, Integer> payload  = new HashMap<>();
+        payload.put("userId", user.getId());
         Algorithm algorithm = Algorithm.HMAC256("sigurnost".getBytes());
         String accessToken = JWT.create()
                 .withSubject(user.getUsername())
+                .withPayload(payload)
                 .withExpiresAt(new Date(System.currentTimeMillis() + Long.parseLong("21600000")))
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
@@ -76,6 +79,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 //        response.setHeader("refresh_token", refreshToken);
         Map<String, String> body = new HashMap<>();
         body.put("accessToken", accessToken);
+        body.put("userId", user.getId().toString());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), body);
     }

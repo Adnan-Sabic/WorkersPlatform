@@ -1,7 +1,6 @@
 import { Form, Radio, Select, Spin } from "antd";
 import React from "react";
 import { useQuery } from "react-query";
-import { findAllAdvertisements } from "../../api/advertisementApi";
 import { findAllCategories } from "../../api/categoriesApi";
 import { findAllCities } from "../../api/cityApi";
 import Button from "../../components/Button/Button";
@@ -22,7 +21,6 @@ const HomeSideBar = ({ form, handleRefresh }) => {
     "categories",
     findAllCategories
   );
-  
 
   return (
     <div className={styles.mainContainer}>
