@@ -17,11 +17,13 @@ import { findAllCities } from "../../api/cityApi";
 import { useMutation, useQuery } from "react-query";
 import { editUserById, findUserById } from "../../api/userApi";
 import { getFromLocalStorage } from "../../util/localStorageUtil";
+import { useLocation } from "react-router";
 const { Option } = Select;
 const { TextArea } = Input;
 
 const ProfileMainContent = () => {
-  console.log("Profil main content");
+
+  const location = useLocation();
 
   const [imageUrl, setImageUrl] = useState(
     "https://yt3.ggpht.com/ytc/AKedOLTFonjbt3zMbyY3XlcSF1ahTGVeBPercEXgKbiJ=s900-c-k-c0x00ffffff-no-rj"
@@ -47,7 +49,7 @@ const ProfileMainContent = () => {
       console.log(data, "----------");
     },
     onError: () => {
-      alert("there was an error");
+      message.error("Došlo je do greške");
     },
   });
 
@@ -57,7 +59,6 @@ const ProfileMainContent = () => {
         let editedUser = form.getFieldsValue();
         delete editedUser.username;
         delete editedUser.email;
-        console.log(editedUser);
         mutate(editedUser);
       },
       () => console.log("Nije uspio")
@@ -215,12 +216,7 @@ const ProfileMainContent = () => {
         <Row justify="center">
           <Col span={12} xs={22} sm={12}>
             <Form.Item label="Detaljnije o Vama" name="about">
-              <TextArea
-                showCount
-                className={styles.aboutTextArea}
-                maxLength={1000}
-                onChange={onChange}
-              />
+              <TextArea showCount maxLength={1000} />
             </Form.Item>
           </Col>
         </Row>

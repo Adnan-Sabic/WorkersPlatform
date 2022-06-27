@@ -1,17 +1,17 @@
 import React from "react";
+import AdvertisementMainContent from "../../features/AdvertisementMainContent/AdvertisementMainContent";
 import HomeFooter from "../../features/HomeFooter/HomeFooter";
 import HomeHeader from "../../features/HomeHeader/HomeHeader";
-import HomeMainContent from "../../features/HomeMainContent/HomeMainContent";
-import styles from "./HomePage.module.css";
+import styles from "./AdvertisementPage.module.css";
 
-const HomePage = () => {
+const AdvertisementPage = () => {
   return (
     <div className={styles.mainContainer}>
       <HomeHeader></HomeHeader>
-      <HomeMainContent></HomeMainContent>
+      <AdvertisementMainContent></AdvertisementMainContent>
       <HomeFooter></HomeFooter>
     </div>
   );
 };
 
-export default HomePage;
+export default AdvertisementPage;

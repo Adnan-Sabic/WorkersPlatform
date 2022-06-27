@@ -49,18 +49,17 @@
 }
 
 .typeOffer, .typeDemand {
-    text-align: center;
     border-radius: 1rem;
     width: 50%;
-    color: var(--white-color);
+    font-weight: 900;
 }
 
 .typeOffer {
-    background-color: green;
+    color: rgb(0, 194, 0);
 }
 
 .typeDemand {
-    background-color: red;
+    color: rgb(253, 60, 60);
 }
 
 .category {
@@ -81,4 +80,9 @@
     position: relative;
     top: 0.7rem;
     text-align: end;
+}
+
+.modifyButton, .deleteButton {
+    width: 45%;
+    border-radius: 1rem;
 }

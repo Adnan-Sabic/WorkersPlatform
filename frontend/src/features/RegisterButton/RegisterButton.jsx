@@ -24,7 +24,6 @@ const RegisterButton = ({ className }) => {
 
   const { mutate, isLoading } = useMutation(registerUser, {
     onSuccess: (data) => {
-      console.log(data);
       setSuccessfulRegistration(true);
     },
     onError: () => {
@@ -46,7 +45,6 @@ const RegisterButton = ({ className }) => {
       () => {
         const newUser = form.getFieldsValue();
         delete newUser.confirm;
-        console.log(newUser);
         mutate(newUser);
       },
       () => console.log("Nije uspio")

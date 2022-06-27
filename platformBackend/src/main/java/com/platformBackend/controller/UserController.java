@@ -46,7 +46,6 @@ public class UserController {
     public UserProfileResponse editUserById(Authentication authentication, @RequestBody UserProfileRequest userProfileRequest) {
         //We use id from token because that prevents users to modify other user data by simply sending id trough request object
         JwtUser user = (JwtUser) authentication.getPrincipal();
-        System.out.println(userProfileRequest);
         return userService.editUserById(user.getId(), userProfileRequest);
     }
 }

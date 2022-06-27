@@ -1,16 +1,21 @@
-import { Form, Radio, Select, Spin } from "antd";
+import { Divider, Form, Radio, Select, Spin } from "antd";
 import React from "react";
 import { useQuery } from "react-query";
+import { useSelector } from "react-redux";
 import { findAllCategories } from "../../api/categoriesApi";
 import { findAllCities } from "../../api/cityApi";
 import Button from "../../components/Button/Button";
-import { ADVERTISEMENT_TYPE_OPTIONS } from "../../constants";
+import {
+  ADVERTISEMENT_TO_SHOW_OPTIONS,
+  ADVERTISEMENT_TYPE_OPTIONS,
+} from "../../constants";
 import styles from "./HomeSideBar.module.css";
 
 const { Option } = Select;
 
 const HomeSideBar = ({ form, handleRefresh }) => {
-  console.log("SideBar");
+
+  const loggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const { data: cities, isLoading: isLoadingCities } = useQuery(
     "cities",
@@ -31,8 +36,26 @@ const HomeSideBar = ({ form, handleRefresh }) => {
         className={styles.form}
         form={form}
         layout="vertical"
-        initialValues={{ type: ADVERTISEMENT_TYPE_OPTIONS[0].value }}
+        // initialValues={{
+        //   type: ADVERTISEMENT_TYPE_OPTIONS[0].value,
+        //   whichAdvertisement: ADVERTISEMENT_TO_SHOW_OPTIONS[0].value,
+        // }}
       >
+        {loggedIn && (
+          <>
+            <Form.Item label="Oglasi" name="whichAdvertisement">
+              <Radio.Group
+                options={ADVERTISEMENT_TO_SHOW_OPTIONS}
+                size="large"
+                className={styles.radioButtonOne}
+                optionType="button"
+                buttonStyle="solid"
+              />
+            </Form.Item>
+            <Divider className={styles.divider} />
+          </>
+        )}
+
         <Form.Item label="Tip oglasa" name="type">
           <Radio.Group
             options={ADVERTISEMENT_TYPE_OPTIONS}

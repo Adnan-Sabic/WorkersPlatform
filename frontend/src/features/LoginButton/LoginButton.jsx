@@ -48,7 +48,6 @@ const LoginButton = ({ className, setLoggedIn }) => {
   const handleLogin = () => {
     form.validateFields().then(
       () => {
-        console.log(form.getFieldsValue());
         mutate(form.getFieldsValue());
       },
       () => console.log("Nije uspio")

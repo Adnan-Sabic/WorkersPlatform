@@ -2,8 +2,19 @@ export const BACKEND_BASE_API = "http://localhost:8080/api/";
 
 export const ADVERTISEMENT_TYPE_OPTIONS = [
   { label: "SVE", value: "ALL" },
-  { label: "PONUDA", value: "DEMAND" },
-  { label: "POTRAŽNJA", value: "OFFER" },
+  { label: "POTRAŽNJA", value: "DEMAND" },
+  { label: "PONUDA", value: "OFFER" },
+];
+
+export const ADVERTISEMENT_TO_SHOW_OPTIONS = [
+  {
+    label: "OSTALI",
+    value: "OTHER",
+  },
+  {
+    label: "MOJI",
+    value: "MY",
+  },
 ];
 
 //LOCAL STORAGE
@@ -73,4 +84,30 @@ export const CONTACT_NUMBER = [
     max: 16,
     message: "Broj ne smije biti duži od 16 brojeva",
   },
+];
+
+export const ADVERTISEMENT_TYPE_RULES = [
+  {
+    required: true,
+    message: "Izaberite tip oglasa",
+  },
+];
+
+export const ADVERTISEMENT_TITLE_RULES = [
+  {
+    required: true,
+    message: "Unesite naziv oglasa",
+  },
+  {
+    min: 5,
+    message: "Naziv mora da sadrži minimalno 5 slova",
+  },
+  {
+    max: 45,
+    message: "Naziv može da sadrži maksimalno 45 slova",
+  },
+];
+
+export const ADVERTISEMENT_CATEGORY_RULES = [
+  { required: true, message: "Potrebno je izabrati kategoriju" },
 ];

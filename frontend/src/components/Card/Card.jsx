@@ -1,9 +1,13 @@
-import { Carousel } from "antd";
+import { Button, message } from "antd";
 import React from "react";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router";
+import { deleteAdvertisementById } from "../../api/advertisementApi";
 import { ADVERTISEMENT_TYPE_OPTIONS } from "../../constants";
 import styles from "./Card.module.css";
 
 const Card = ({
+  id,
   title,
   type = "OFFER",
   category,
@@ -12,7 +16,28 @@ const Card = ({
   userName,
   userNumber,
   daysAgo,
+  showOptionButtons = true,
+  refreshAdvertisementsFunction,
 }) => {
+  const navigate = useNavigate();
+  const { mutate, isLoading } = useMutation(deleteAdvertisementById, {
+    onSuccess: (data) => {
+      message.success(`Uspješno ste obrisali oglas '${title}'`);
+      refreshAdvertisementsFunction();
+    },
+    onError: () => {
+      message.error(`Brisanje oglasa '${title}' nije uspjelo`);
+    },
+  });
+
+  const handleDeleteButton = () => {
+    mutate(id);
+  };
+
+  const handleModifyButton = () => {
+    navigate("/advertisement", { state: { advertisementId: id } });
+  };
+
   return (
     <div className={styles.mainContainer}>
       <img
@@ -38,8 +63,30 @@ const Card = ({
           <div className={styles.category}>{city}</div>
         </div>
         <div className={`${styles.rowContainer}`}>
-          <a className={styles.userName}>{userName}</a>
-          <div className={styles.category}>{userNumber}</div>
+          {showOptionButtons ? (
+            <>
+              <Button
+                className={styles.modifyButton}
+                type="primary"
+                onClick={handleModifyButton}
+              >
+                Izmjeni
+              </Button>
+              <Button
+                className={styles.deleteButton}
+                type="primary"
+                danger
+                onClick={handleDeleteButton}
+              >
+                Obrisi
+              </Button>
+            </>
+          ) : (
+            <>
+              <a className={styles.userName}>{userName}</a>
+              <div className={styles.category}>{userNumber}</div>
+            </>
+          )}
         </div>
         <div className={styles.creationDate}>
           {daysAgo === 0 ? "danas" : "prije " + daysAgo + " dana"}

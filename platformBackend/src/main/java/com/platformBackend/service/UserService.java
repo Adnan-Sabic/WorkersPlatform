@@ -50,9 +50,7 @@ public class UserService implements UserDetailsService {
         userEntity.setAbout(userProfileRequest.getAbout());
         //TODO maybe smarter?
         userEntity.setCity(cityRepository.getById(userProfileRequest.getCityId()));
-        System.out.println(userEntity);
         userEntity = userRepository.saveAndFlush(userEntity);
-        System.out.println("after" + userEntity);
         return modelMapper.map(userEntity, UserProfileResponse.class);
     }
 

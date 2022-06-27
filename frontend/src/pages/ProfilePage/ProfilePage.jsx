@@ -5,7 +5,6 @@ import ProfileMainContent from "../../features/ProfileMainContent/ProfileMainCon
 import styles from "./ProfilePage.module.css";
 
 const ProfilePage = () => {
-  console.log("Profile page");
   return (
     <div className={styles.mainContainer}>
       <HomeHeader></HomeHeader>

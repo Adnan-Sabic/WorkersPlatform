@@ -30,47 +30,18 @@
     width: 33.33% !important;
 }
 
-/* .radioGruopType > label:hover {
-    color: var(--white-color);
-    background-color: var(--secondary-color) !important;
-    border: 0 !important;
-    box-shadow: 0 !important;
+.divider {
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-.radioGruopType > label:active {
-    color: var(--white-color) !important;
-    background-color: var(--secondary-color) !important;
-    border: 0 !important;
-    box-shadow: 0 !important;
+.radioButtonOne {
+    width: 100%;
 }
 
-.radioGruopType > label:focus {
-    color: var(--white-color) !important;
-    background-color: var(--secondary-color) !important;
-    border: 0 !important;
-    box-shadow: 0 !important;
+.radioButtonOne > label{
+    width: 50% !important;
 }
 
-.radioGruopType > label:focus-within {
-    color: var(--white-color) !important;
-    background-color: var(--secondary-color) !important;
-    border: 0 !important;
-    box-shadow: 0 !important;
-}
-
-.radioGruopType > label:checked {
-    color: var(--white-color) !important;
-    background-color: var(--secondary-color) !important;
-    border: 0 !important;
-    box-shadow: 0 !important;
-}
-
-.radioGruopType > label:not(label:checked) {
-    color: var(--white-color) !important;
-    background-color: var(--secondary-color) !important;
-    border: 0 !important;
-    box-shadow: 0 !important;
-} */
 
 .form {
     padding-top: 4rem;

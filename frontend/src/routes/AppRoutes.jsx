@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
+import AdvertisementPage from "../pages/AdvertisementPage/AdvertisementPage";
 import HomePage from "../pages/HomePage/HomePage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import SettingsPage from "../pages/SettingsPage/SettingsPage";
@@ -14,6 +15,7 @@ const AppRoutes = () => {
         <Route path="home" element={<HomePage />} />
         <Route element={<ProtectedRoute />}>
           <Route path="profile" element={<ProfilePage />} />
+          <Route path="advertisement" element={<AdvertisementPage />} />
           <Route path="test" element={<TestPage />} />
           <Route path="settings" element={<SettingsPage />} />
         </Route>

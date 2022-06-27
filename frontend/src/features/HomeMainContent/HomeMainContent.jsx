@@ -11,8 +11,6 @@ import { findAllAdvertisements } from "../../api/advertisementApi";
 const { Search } = Input;
 
 const HomeMainContent = () => {
-  console.log("mainContent");
-
   const [filterForm] = Form.useForm();
   const [filter, setFilter] = useState({ type: "ALL" });
 
@@ -52,10 +50,6 @@ const HomeMainContent = () => {
     refetch();
   };
 
-  console.log("data", advertisements?.data);
-  console.log("loading", isLoadingAdvertisements);
-  console.log("isError", error);
-
   return (
     <div className={styles.mainContainer}>
       <HomeSideBar
@@ -80,19 +74,28 @@ const HomeMainContent = () => {
           <>
             {advertisements?.data?.content?.length !== 0 ? (
               <div className={styles.cardContainer}>
-                {advertisements?.data?.content?.map((advertisement) => (
-                  <Card
-                    key={advertisement.id}
-                    title={advertisement.title}
-                    type={advertisement.type}
-                    category={advertisement.categoryName}
-                    price={advertisement.price}
-                    city={advertisement.cityName}
-                    userName={advertisement.user.username}
-                    userNumber={advertisement.user.contactNumber}
-                    daysAgo={advertisement.daysAgo}
-                  ></Card>
-                ))}
+                {advertisements?.data?.content?.map((advertisement) => {
+                  const showOptions =
+                    filterForm.getFieldValue("whichAdvertisement") === "MY"
+                      ? true
+                      : false;
+                  return (
+                    <Card
+                      key={advertisement.id}
+                      id={advertisement.id}
+                      title={advertisement.title}
+                      type={advertisement.type}
+                      category={advertisement.categoryName}
+                      price={advertisement.price}
+                      city={advertisement.cityName}
+                      userName={advertisement.user.username}
+                      userNumber={advertisement.user.contactNumber}
+                      daysAgo={advertisement.daysAgo}
+                      showOptionButtons={showOptions}
+                      refreshAdvertisementsFunction={() => handleRefresh()}
+                    ></Card>
+                  );
+                })}
               </div>
             ) : (
               <div className={styles.noDataMessage}>

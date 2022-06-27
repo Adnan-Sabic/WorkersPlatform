@@ -25,7 +25,7 @@ public class AdvertisementEntity {
     private UserEntity user;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "categoryId", nullable = false, updatable = false, insertable = false)
+    @JoinColumn(name = "categoryId", nullable = false)
     private CategoryEntity category;
 
     @Enumerated(EnumType.STRING)
@@ -33,7 +33,7 @@ public class AdvertisementEntity {
     private AdvType type;
 
     @Column(name = "created", nullable = false)
-    private LocalDateTime created;
+    private LocalDateTime created = LocalDateTime.now();;
 
     @Column(name = "title", nullable = false, length = 45)
     private String title;
@@ -45,7 +45,7 @@ public class AdvertisementEntity {
     private BigDecimal price;
 
     @Column(name = "isActive", nullable = false)
-    private Boolean isActive = false;
+    private Boolean isActive = true;
 
     @Column(name = "removedBecause", length = 500)
     private String removedBecause;

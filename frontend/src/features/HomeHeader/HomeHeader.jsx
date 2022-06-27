@@ -11,7 +11,6 @@ import { logoutUser } from "../../redux/slices/userSlice";
 import { useNavigate } from "react-router";
 
 const HomeHeader = () => {
-  console.log("Home Header");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -30,6 +29,9 @@ const HomeHeader = () => {
               text="Objavi"
               icon={<ion-icon name="add-circle-outline"></ion-icon>}
               className={styles.marginRight}
+              onClick={() =>
+                navigate("/advertisement", { state: { advertisementId: null } })
+              }
             ></Button>
             <Button
               text="Moj profil"
