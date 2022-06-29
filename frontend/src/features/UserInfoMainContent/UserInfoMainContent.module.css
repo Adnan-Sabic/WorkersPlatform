@@ -1,0 +1,58 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: var(--light-primary-color);
+    overflow: auto;
+    align-items: center;
+    padding-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.rowContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.columnContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.imageContainer {
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.userImage {
+    height: 100%;
+    width: 100%;
+    border-radius: 1rem;
+    object-fit: fill;
+}
+
+.textAreaContainer {
+    width: 100%;
+    height: 10rem;
+}
+
+.sendMessageButtonContainer {
+    padding: 1rem;
+    justify-content: end;
+}
+
+.sendMessageButton {
+    width: 25%;
+    height: 3rem;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+}
+
+.aboutUser {
+    font-size: 3rem;
+    font-weight: 900;
+    padding: 1rem;
+}
+

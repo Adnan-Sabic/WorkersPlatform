@@ -5,6 +5,7 @@ import com.platformBackend.model.entity.UserEntity;
 import com.platformBackend.model.request.RegisterUserRequest;
 import com.platformBackend.model.request.UserProfileRequest;
 import com.platformBackend.model.response.JwtUser;
+import com.platformBackend.model.response.UserInfoResponse;
 import com.platformBackend.model.response.UserProfileResponse;
 import com.platformBackend.model.response.UserResponse;
 import com.platformBackend.service.UserService;
@@ -40,6 +41,13 @@ public class UserController {
 //        JwtUser user = (JwtUser) authentication.getPrincipal();
         return userService.findUserById(id);
     }
+
+    @GetMapping("/{id}/info")
+    @ResponseBody
+    public UserInfoResponse getUserById( @PathVariable Integer id) throws NotFoundException {
+        return userService.findUserInfoById(id);
+    }
+
 
     @PutMapping
     @ResponseBody

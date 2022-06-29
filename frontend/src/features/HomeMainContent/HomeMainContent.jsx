@@ -7,11 +7,14 @@ import { Input } from "antd";
 import styles from "./HomeMainContent.module.css";
 import { useQuery } from "react-query";
 import { findAllAdvertisements } from "../../api/advertisementApi";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../redux/slices/userSlice";
 
 const { Search } = Input;
 
 const HomeMainContent = () => {
   const [filterForm] = Form.useForm();
+  const dispatch = useDispatch();
   const [filter, setFilter] = useState({ type: "ALL" });
 
   const {
@@ -25,6 +28,11 @@ const HomeMainContent = () => {
     () => findAllAdvertisements(filter),
     {
       refetchOnWindowFocus: false,
+      useErrorBoundary: (error) => {
+        if (error.response?.status === 403) {
+          dispatch(logoutUser());
+        }
+      },
       // enabled: false, // disable this query from automatically running
     }
   );
@@ -88,6 +96,7 @@ const HomeMainContent = () => {
                       category={advertisement.categoryName}
                       price={advertisement.price}
                       city={advertisement.cityName}
+                      userId={advertisement.user.id}
                       userName={advertisement.user.username}
                       userNumber={advertisement.user.contactNumber}
                       daysAgo={advertisement.daysAgo}

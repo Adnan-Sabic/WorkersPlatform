@@ -19,3 +19,35 @@
     margin-right: 2rem;
 }
 
+@media screen and (max-width: 1500px) {
+    .mainContainer {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        min-height: 12rem;
+    }
+    .rowContainer {
+        padding-bottom: 1rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .mainContainer {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        min-height: 20rem;
+    }
+    .rowContainer {
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+        padding-bottom: 1rem;
+        gap: 1rem;
+    }
+    
+    .marginRight {
+        margin-right: 0;
+        width: 100%;
+    }
+}

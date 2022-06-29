@@ -13,6 +13,7 @@ const Card = ({
   category,
   price,
   city,
+  userId,
   userName,
   userNumber,
   daysAgo,
@@ -30,16 +31,32 @@ const Card = ({
     },
   });
 
-  const handleDeleteButton = () => {
+  const handleDeleteButton = (e) => {
+    e.stopPropagation();
     mutate(id);
   };
 
-  const handleModifyButton = () => {
+  const handleModifyButton = (e) => {
+    e.stopPropagation();
     navigate("/advertisement", { state: { advertisementId: id } });
   };
 
+  const handleNavigateToUserInfoPage = (e) => {
+    e.stopPropagation();
+    navigate("/userInfo", { state: { userId: userId } });
+  };
+
+  const handleOnCardClick = () => {
+    navigate("/advertisementInfo", {
+      state: {
+        id: id,
+        daysAgo: daysAgo,
+      },
+    });
+  };
+
   return (
-    <div className={styles.mainContainer}>
+    <div className={styles.mainContainer} onClick={handleOnCardClick}>
       <img
         className={styles.imageContainer}
         src="https://cdn.vox-cdn.com/thumbor/IneeXFCJM7YjxGrqgg5zJBmblHA=/0x0:3809x2857/1200x800/filters:focal(1601x1125:2209x1733)/cdn.vox-cdn.com/uploads/chorus_image/image/66274935/Workshop_0919-HS-40Something_Ask-studio_TommyCorner-1.0.0.jpg"
@@ -83,7 +100,12 @@ const Card = ({
             </>
           ) : (
             <>
-              <a className={styles.userName}>{userName}</a>
+              <div
+                className={styles.userLink}
+                onClick={handleNavigateToUserInfoPage}
+              >
+                {userName}
+              </div>
               <div className={styles.category}>{userNumber}</div>
             </>
           )}

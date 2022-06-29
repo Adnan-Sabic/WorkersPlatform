@@ -5,7 +5,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.platformBackend.model.request.LoginUserRequest;
 import com.platformBackend.model.response.JwtUser;
-import org.springframework.beans.factory.annotation.Value;
+import com.platformBackend.util.TokenProperties;
+import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,20 +24,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-
-    //TODO make this work
-    @Value("${token.secret}")
-    private String authorizationSecret;
-    @Value("${token.expire}")
-    private String tokenExpirationTime;
+    private final TokenProperties tokenProperties;
 
     private final AuthenticationManager authenticationManager;
-
-    public CustomAuthenticationFilter(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-    }
 
 
     @Override
@@ -58,11 +51,11 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         JwtUser user = (JwtUser) authentication.getPrincipal();
         Map<String, Integer> payload  = new HashMap<>();
         payload.put("userId", user.getId());
-        Algorithm algorithm = Algorithm.HMAC256("sigurnost".getBytes());
+        Algorithm algorithm = Algorithm.HMAC256(tokenProperties.getSecret().getBytes());
         String accessToken = JWT.create()
                 .withSubject(user.getUsername())
                 .withPayload(payload)
-                .withExpiresAt(new Date(System.currentTimeMillis() + Long.parseLong("21600000")))
+                .withExpiresAt(new Date(System.currentTimeMillis() + tokenProperties.getExpire().toMillis()))
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);

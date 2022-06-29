@@ -22,7 +22,6 @@ const { Option } = Select;
 const { TextArea } = Input;
 
 const ProfileMainContent = () => {
-
   const location = useLocation();
 
   const [imageUrl, setImageUrl] = useState(
@@ -35,12 +34,13 @@ const ProfileMainContent = () => {
     "cities",
     findAllCities
   );
+  const userId = getFromLocalStorage(USER_ID);
 
   const {
     data: user,
     isLoading: isLoadingUser,
     refetch,
-  } = useQuery(`user${getFromLocalStorage(USER_ID)}`, findUserById);
+  } = useQuery(["user", userId], () => findUserById(userId));
 
   const { mutate, isLoading } = useMutation(editUserById, {
     onSuccess: (data) => {
@@ -216,7 +216,11 @@ const ProfileMainContent = () => {
         <Row justify="center">
           <Col span={12} xs={22} sm={12}>
             <Form.Item label="Detaljnije o Vama" name="about">
-              <TextArea showCount maxLength={1000} />
+              <TextArea
+                className={styles.aboutTextArea}
+                showCount
+                maxLength={1000}
+              />
             </Form.Item>
           </Col>
         </Row>

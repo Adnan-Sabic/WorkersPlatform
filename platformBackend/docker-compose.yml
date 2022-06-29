@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+
+  platform-back:
+    image: platform-back
+    restart: always
+    ports:
+      - "10080:8080"
+    depends_on:
+      - db
+      - minio
+
+  adminer:
+
+    image: adminer
+    restart: always
+    ports:
+      - "10000:8080"
+    depends_on:
+      - db
+
+  db:
+
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - platform-mysql-db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: platform
+      MYSQL_PASSWORD: platform
+      MYSQL_DATABASE: workersdb
+
+
+  minio:
+    image: quay.io/minio/minio
+    restart: always
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio-data:/data
+    ports:
+      - "11001:9001"
+      - "11000:9000"
+    environment:
+      MINIO_ROOT_USER: workers-platform
+      MINIO_ROOT_PASSWORD: workers-platform
+
+
+volumes:
+  platform-mysql-db:
+  minio-data:

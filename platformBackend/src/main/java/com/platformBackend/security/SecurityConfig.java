@@ -3,6 +3,7 @@ package com.platformBackend.security;
 import com.platformBackend.security.filter.CustomAuthenticationFilter;
 import com.platformBackend.security.filter.CustomAuthorizationFilter;
 import com.platformBackend.service.UserService;
+import com.platformBackend.util.TokenProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    private final TokenProperties tokenProperties;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
@@ -36,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
+        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(tokenProperties, authenticationManagerBean());
         customAuthenticationFilter.setFilterProcessesUrl("/api/login");
         http.csrf().disable();
         http.cors();
@@ -44,13 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //      define what is accessible to everyone without token
         http.authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/categories", "/api/cities", "/api/minio").permitAll()
-                .regexMatchers(HttpMethod.GET, "/api/advertisements.*").permitAll()
+                .regexMatchers(HttpMethod.GET, "/api/advertisements.*", "/api/users/.*/info").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/login", "/api/users").permitAll();
 //      add need role to access
 //        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasAnyAuthority("NORMAL");
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
-        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new CustomAuthorizationFilter(tokenProperties), UsernamePasswordAuthenticationFilter.class);
     }
 
     //Fix cors error on frontend investigate
@@ -62,7 +65,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         config.setAllowedOriginPatterns(Collections.singletonList("*"));
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
-        config.addAllowedMethod("PATCH");
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }

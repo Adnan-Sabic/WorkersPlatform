@@ -60,6 +60,7 @@ const LoginButton = ({ className, setLoggedIn }) => {
         text={"Prijavi se"}
         icon={<ion-icon name="log-in-outline"></ion-icon>}
         onClick={showModal}
+        className={styles.loginButton}
       ></Button>
       <Modal
         title="Prijava"

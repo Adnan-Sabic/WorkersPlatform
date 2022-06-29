@@ -2,18 +2,13 @@ package com.platformBackend.model.response;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
-public class UserProfileResponse {
+public class UserInfoResponse {
     private Integer id;
-    private LocalDateTime created;
     private CityResponse city;
     private String firstName;
     private String lastName;
     private String contactNumber;
-    private String email;
-    private String username;
     private String about;
     private String imageUrl;
 }

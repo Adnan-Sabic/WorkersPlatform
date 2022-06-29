@@ -5,6 +5,7 @@ import com.platformBackend.model.entity.UserEntity;
 import com.platformBackend.model.request.RegisterUserRequest;
 import com.platformBackend.model.request.UserProfileRequest;
 import com.platformBackend.model.response.JwtUser;
+import com.platformBackend.model.response.UserInfoResponse;
 import com.platformBackend.model.response.UserProfileResponse;
 import com.platformBackend.model.response.UserResponse;
 import com.platformBackend.repository.CityRepository;
@@ -40,6 +41,10 @@ public class UserService implements UserDetailsService {
 
     public UserProfileResponse findUserById(Integer userId) throws NotFoundException {
         return modelMapper.map(userRepository.findById(userId).orElseThrow(NotFoundException::new), UserProfileResponse.class);
+    }
+
+    public UserInfoResponse findUserInfoById(Integer userId) throws NotFoundException {
+        return modelMapper.map(userRepository.findById(userId).orElseThrow(NotFoundException::new), UserInfoResponse.class);
     }
 
     public UserProfileResponse editUserById(Integer userId, UserProfileRequest userProfileRequest) {

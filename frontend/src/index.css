@@ -21,11 +21,14 @@ body {
   --dark-primary-color: #005180;
   --light-primary-color: #eeeded;
   --secondary-color: #d37203;
+  --light-secondary-color:#fa8500;
 
   --gray-dark: rgb(200, 200, 200); 
 
   --white-color: #FFFFFF;
   --black-color: #000000;
+
+  --link-color: #1890FF;
 
   --box-shadow-one: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }

@@ -76,7 +76,7 @@ const RegisterButton = ({ className }) => {
   }
 
   return (
-    <div className={className}>
+    <div className={`${styles.registerButton} ${className}`}>
       <Button
         text={"Registruj se"}
         icon={<ion-icon name="newspaper-outline"></ion-icon>}

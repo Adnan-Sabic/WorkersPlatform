@@ -7,7 +7,37 @@
     align-items: center;
     padding: 1.2rem;
     box-shadow: var(--box-shadow-one);
+    cursor: pointer;
+    
+    transform: scale(1);
+    transition: transform 1s;
+    /* animation-name: hoverCardAnimationOut;
+    animation-duration: 1s; */
 }
+
+.mainContainer:hover {
+    transform: scale(1.05);
+    /* animation-name: hoverCardAnimationIn;
+    animation-duration: 1s; */
+}
+
+/* @keyframes hoverCardAnimationIn {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes hoverCardAnimationOut {
+    0% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+} */
 
 .imageContainer {
     box-shadow: #0075B7 0px 0px 0px 3px;
@@ -44,7 +74,7 @@
    -webkit-line-clamp: 2; /* number of lines to show */
 }
 
-.typeOffer, .typeDemand, .category, .price, .userName {
+.typeOffer, .typeDemand, .category, .price, .userName, .userLink {
     font-size: 1.2rem;
 }
 
@@ -85,4 +115,13 @@
 .modifyButton, .deleteButton {
     width: 45%;
     border-radius: 1rem;
+}
+
+.userLink {
+    color: var(--link-color);
+}
+
+.userLink:hover {
+    cursor: pointer;
+    filter: brightness(110%);
 }

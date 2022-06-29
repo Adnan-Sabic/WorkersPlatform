@@ -44,7 +44,7 @@
 
 
 .form {
-    padding-top: 4rem;
+    padding-top: 3rem;
     display: flex;
     flex-direction: column;
     width: 22rem;
@@ -58,4 +58,24 @@
 .sumbitButton {
     margin-top: 1.5rem;
     width: 100%;
+}
+
+@media screen and (max-width: 650px) {
+    form > div {
+        flex-direction: row;
+    }
+    .sumbitButton {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1500px)  {
+    form > div {
+        flex-direction: row;
+    }
+    .sumbitButton {
+        margin-bottom: 1.5rem;
+    }
 }

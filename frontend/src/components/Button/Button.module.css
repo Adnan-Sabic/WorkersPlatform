@@ -34,3 +34,15 @@
     color: var(--black-color);
     border-right-color: var(--black-color);
 }
+
+@media screen and (max-width: 650px) {
+    .mainContainer {
+        width: 100%;
+        justify-content: center;
+    }
+    .mainContainer > ion-icon {
+        padding-right: 0;
+        border-right: 0;
+        padding-right: 0.4rem;
+    }
+}

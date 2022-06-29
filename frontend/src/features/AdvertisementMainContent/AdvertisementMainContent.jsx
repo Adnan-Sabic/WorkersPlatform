@@ -162,8 +162,15 @@ const AdvertisementMainContent = () => {
   const {
     data: advertisement,
     isLoading: isLoadingAdvertisement,
-  } = useQuery(["advertisement", advertisementId], () =>
-    getAdvertisementById(advertisementId)
+    isRefetching: isRefetchingAdvertisement,
+  } = useQuery(
+    ["advertisement", advertisementId],
+    () => getAdvertisementById(advertisementId),
+    {
+      refetchOnMount: "always",
+      refetchOnWindowFocus: "always",
+      refetchOnReconnect: "always",
+    }
   );
 
   const handleSumbitButton = () => {
@@ -179,7 +186,7 @@ const AdvertisementMainContent = () => {
     );
   };
 
-  if (isLoadingAdvertisement) {
+  if (isLoadingAdvertisement || isRefetchingAdvertisement) {
     return <Spin></Spin>;
   }
 

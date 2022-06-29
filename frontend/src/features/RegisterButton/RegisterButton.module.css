@@ -33,3 +33,9 @@
     font-size: 2rem;
     text-align: center;
 }
+
+@media screen and (max-width: 650px) {
+    .registerButton {
+        width: 100%;
+    }
+}
