@@ -60,6 +60,12 @@
     width: 100%;
 }
 
+.createNewAdvButton {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
 @media screen and (max-width: 650px) {
     form > div {
         flex-direction: row;

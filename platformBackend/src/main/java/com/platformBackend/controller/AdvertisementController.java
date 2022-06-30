@@ -5,6 +5,7 @@ import com.platformBackend.model.enums.AdvType;
 import com.platformBackend.model.request.CreateAdvertisementRequest;
 import com.platformBackend.model.request.EditAdvertisementRequest;
 import com.platformBackend.model.response.AdvertisementResponse;
+import com.platformBackend.model.response.EditAdvertisementResponse;
 import com.platformBackend.model.response.JwtUser;
 import com.platformBackend.model.response.OneAdvertisementResponse;
 import com.platformBackend.service.AdvertisementService;
@@ -55,8 +56,7 @@ public class AdvertisementController {
 
     @PutMapping
     @ResponseBody
-    //TODO kako postaviti response status ako nije nesto dobro
-    public OneAdvertisementResponse editAdvertisementById(Authentication authentication, @RequestBody EditAdvertisementRequest advertisementRequest) throws NotFoundException {
+    public EditAdvertisementResponse editAdvertisementById(Authentication authentication, @RequestBody EditAdvertisementRequest advertisementRequest) throws NotFoundException {
         JwtUser owner = (JwtUser) authentication.getPrincipal();
         return advertisementService.editAdvertisementById(owner.getId(),advertisementRequest);
     }

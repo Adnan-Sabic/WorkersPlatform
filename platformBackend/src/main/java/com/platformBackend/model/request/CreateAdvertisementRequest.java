@@ -12,5 +12,5 @@ public class CreateAdvertisementRequest {
     private String title;
     private String description;
     private BigDecimal price;
-    private String[] imagesUrls;
+    private Integer numberOfImages;
 }

@@ -10,7 +10,7 @@ import {
   message,
 } from "antd";
 import ImgCrop from "antd-img-crop";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ProfileMainContent.module.css";
 import { CONTACT_NUMBER, FIRST_NAME_RULES, USER_ID } from "../../constants";
 import { findAllCities } from "../../api/cityApi";
@@ -18,23 +18,20 @@ import { useMutation, useQuery } from "react-query";
 import { editUserById, findUserById } from "../../api/userApi";
 import { getFromLocalStorage } from "../../util/localStorageUtil";
 import { useLocation } from "react-router";
+import { updatePricuteToS3 } from "../../api/s3BucketApi";
+import { type } from "@testing-library/user-event/dist/type";
 const { Option } = Select;
 const { TextArea } = Input;
 
 const ProfileMainContent = () => {
-  const location = useLocation();
-
-  const [imageUrl, setImageUrl] = useState(
-    "https://yt3.ggpht.com/ytc/AKedOLTFonjbt3zMbyY3XlcSF1ahTGVeBPercEXgKbiJ=s900-c-k-c0x00ffffff-no-rj"
-  );
-
+  const userId = getFromLocalStorage(USER_ID);
+  const [imageUrl, setImageUrl] = useState();
+  const [imageData, setImageData] = useState();
   const [form] = Form.useForm();
 
-  const { data: cities, isLoading: isLoadingCities } = useQuery(
-    "cities",
-    findAllCities
-  );
-  const userId = getFromLocalStorage(USER_ID);
+  useEffect(() => {
+    setImageUrl(user?.data?.imageUrl);
+  }, [user]);
 
   const {
     data: user,
@@ -42,21 +39,45 @@ const ProfileMainContent = () => {
     refetch,
   } = useQuery(["user", userId], () => findUserById(userId));
 
+  const { data: cities, isLoading: isLoadingCities } = useQuery(
+    "cities",
+    findAllCities
+  );
+
   const { mutate, isLoading } = useMutation(editUserById, {
     onSuccess: (data) => {
-      refetch();
       message.success("Uspješno ste ažurirali podatke na profilu");
-      console.log(data, "----------");
+      console.log(imageData);
+      if (imageData && data.data.imageUrl) {
+        mutateSendPicture({
+          presignedUrl: data.data.imageUrl,
+          imageData: imageData,
+        });
+      } else {
+        refetch();
+      }
     },
     onError: () => {
       message.error("Došlo je do greške");
     },
   });
 
+  const { mutate: mutateSendPicture, isLoading: isLoadingPicture } =
+    useMutation(updatePricuteToS3, {
+      onSuccess: (data) => {
+        refetch();
+        message.success("Uspješno ste ažurirali sliku na profilu");
+      },
+      onError: () => {
+        message.error("Došlo je do greške prilikom promjene slike");
+      },
+    });
+
   const handleUpdateUser = () => {
     form.validateFields().then(
       () => {
         let editedUser = form.getFieldsValue();
+        editedUser.updateImage = imageData != null;
         delete editedUser.username;
         delete editedUser.email;
         mutate(editedUser);
@@ -65,26 +86,16 @@ const ProfileMainContent = () => {
     );
   };
 
-  const onChange = ({ fileList: newFileList }) => {
-    setImageUrl(newFileList);
-  };
+  const handleBefore = (file) => {
+    const reader = new FileReader();
 
-  const onPreview = async (file) => {
-    let src = file.url;
+    reader.onload = (e) => {
+      setImageUrl(e.target.result);
+    };
+    reader.readAsDataURL(file);
+    setImageData(file);
 
-    if (!src) {
-      src = await new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-
-        reader.onload = () => resolve(reader.result);
-      });
-    }
-
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow?.document.write(image.outerHTML);
+    return false;
   };
 
   if (isLoadingUser) {
@@ -94,7 +105,7 @@ const ProfileMainContent = () => {
   return (
     <div className={styles.mainContainer}>
       <Row justify="center">
-        <Col span={12} className={styles.profileHeader}>
+        <Col span={16} className={styles.profileHeader}>
           Uredite profil
         </Col>
       </Row>
@@ -109,14 +120,14 @@ const ProfileMainContent = () => {
           firstName: user?.data?.firstName,
           lastName: user?.data?.lastName,
           categoryId: user?.data?.categoryId,
-          cityId: user?.data?.cityId,
+          cityId: user?.data?.city?.id,
           contactNumber: user?.data?.contactNumber,
           about: user?.data?.about,
         }}
         onFinish={handleUpdateUser}
       >
-        <Row justify="center">
-          <Col span={8} xs={22} sm={8}>
+        <Row justify="center" align="middle">
+          <Col span={8} xs={22} sm={22} md={16} xl={8} xxl={8}>
             <Col span={22}>
               <Form.Item label="Korisničko ime" name="username">
                 <Input disabled />
@@ -191,18 +202,15 @@ const ProfileMainContent = () => {
             </Row>
             <Col span={22}></Col>
           </Col>
-          <Col span={4} xs={22} sm={4}>
+          <Col span={4} xs={22} sm={22} md={16} xl={8} xxl={8}>
             <Col className={styles.profilImageHeader}>Profilna slika</Col>
             <img className={styles.uploadImage} src={imageUrl} alt="" />
             <Col>
               <ImgCrop>
                 <Upload
-                  listType="picture"
                   // className={styles.uploadImage}
                   showUploadList={false}
-                  // beforeUpload={beforeUpload}
-                  onChange={onChange}
-                  onPreview={onPreview}
+                  beforeUpload={handleBefore}
                   className={styles.uploadButton}
                 >
                   <Button type="primary" className={styles.uploadButton}>
@@ -214,7 +222,7 @@ const ProfileMainContent = () => {
           </Col>
         </Row>
         <Row justify="center">
-          <Col span={12} xs={22} sm={12}>
+          <Col span={12} xs={22} sm={12} md={16}>
             <Form.Item label="Detaljnije o Vama" name="about">
               <TextArea
                 className={styles.aboutTextArea}
@@ -225,7 +233,7 @@ const ProfileMainContent = () => {
           </Col>
         </Row>
         <Row justify="center" align="middle">
-          <Col span={4} offset={8} xs={14} sm={4}>
+          <Col span={4} offset={8} xs={14} sm={4} md={8}>
             <Form.Item className={styles.sumbitButtonForm}>
               <Button
                 type="primary"

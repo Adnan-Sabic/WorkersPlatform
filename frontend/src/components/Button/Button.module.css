@@ -26,8 +26,8 @@
     transition: all 0.5s;
     font-size: 1.75rem;
     color: white;
-    padding-right: 1rem;
-    border-right: 0.125rem solid white;
+    /* padding-right: 1rem; */
+    /* border-right: 0.125rem solid white; */
 }
 
 .mainContainer:hover > ion-icon {

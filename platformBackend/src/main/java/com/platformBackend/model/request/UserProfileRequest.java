@@ -9,5 +9,5 @@ public class UserProfileRequest {
     private String lastName;
     private String contactNumber;
     private String about;
-    private String imageUrl;
+    private Boolean updateImage;
 }

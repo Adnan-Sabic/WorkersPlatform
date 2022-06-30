@@ -30,6 +30,8 @@
 .imageContainer {
     border-radius: 1rem;
     padding: 1rem;
+    height: 27.6rem;
+    width: 34rem;
 }
 
 .userImage {

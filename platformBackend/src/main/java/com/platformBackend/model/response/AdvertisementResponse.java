@@ -18,6 +18,6 @@ public class AdvertisementResponse {
     private Long daysAgo;
     private String title;
     private String description;
-    private List<String> images;
+    private List<String> presignedUrls;
     private BigDecimal price;
 }

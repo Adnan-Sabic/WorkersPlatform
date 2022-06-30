@@ -1,5 +1,3 @@
-import { USER_ID } from "../constants";
-import { getFromLocalStorage } from "../util/localStorageUtil";
 import { request } from "./axiosUtils";
 
 const USER_ENDPOINT = "users";

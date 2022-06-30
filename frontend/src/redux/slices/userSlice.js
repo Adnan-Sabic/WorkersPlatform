@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { client } from "../../api/axiosUtils";
 import { TOKEN_KEY, USER_ID } from "../../constants";
 import {
   getFromLocalStorage,
@@ -18,6 +19,7 @@ export const userSlice = createSlice({
     },
     logoutUser: (state) => {
       state.isLoggedIn = false;
+      delete client.defaults.headers.common.Authorization
       removeFromLocalStorage(TOKEN_KEY);
       removeFromLocalStorage(USER_ID);
     },

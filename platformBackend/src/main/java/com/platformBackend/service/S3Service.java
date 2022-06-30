@@ -1,24 +1,28 @@
 package com.platformBackend.service;
 
 import com.amazonaws.ClientConfiguration;
+import com.amazonaws.HttpMethod;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectResult;
+import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.platformBackend.util.S3Properties;
 import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayInputStream;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Date;
 
 @Service
 public class S3Service {
 
     private final AmazonS3 s3Client;
     private final String bucketName;
+
+    private final Duration duration;
 
     public S3Service(S3Properties s3Properties) {
 
@@ -35,11 +39,23 @@ public class S3Service {
                 .build();
 
         this.bucketName = s3Properties.getBucketName();
+        this.duration = s3Properties.getLinkDuration();
     }
 
-    public void uploadObject(String filename, byte[] image) {
-        PutObjectResult result = s3Client.putObject(this.bucketName, filename, new ByteArrayInputStream(image), new ObjectMetadata());
+    private String generateLink(String filename, HttpMethod method) {
+        GeneratePresignedUrlRequest request =
+                new GeneratePresignedUrlRequest(bucketName, filename)
+                        .withMethod(method)
+                        .withExpiration(Date.from(Instant.now().plusMillis(this.duration.toMillis())));
+        return s3Client.generatePresignedUrl(request).toString();
     }
 
+    public String getFile(String filename) {
+        return generateLink(filename, HttpMethod.GET);
+    }
+
+    public String uploadFile(String filename) {
+        return generateLink(filename, HttpMethod.PUT);
+    }
 
 }

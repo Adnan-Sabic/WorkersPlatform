@@ -47,7 +47,7 @@
 }
 
 .uploadImage {
-    height: 74.4%;
+    height: 20rem;
     width: 100%;
     object-fit: cover;
 }
@@ -83,4 +83,12 @@
 
 .profilImageHeader {
     padding-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 650px) {
+    .profileHeader {
+        font-size: 3rem;
+        font-weight: 600;
+    }
+    
 }

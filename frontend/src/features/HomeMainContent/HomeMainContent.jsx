@@ -20,8 +20,6 @@ const HomeMainContent = () => {
   const {
     data: advertisements,
     isLoading: isLoadingAdvertisements,
-    isError,
-    error,
     refetch,
   } = useQuery(
     ["advertisements", filter],
@@ -33,7 +31,6 @@ const HomeMainContent = () => {
           dispatch(logoutUser());
         }
       },
-      // enabled: false, // disable this query from automatically running
     }
   );
 
@@ -74,7 +71,7 @@ const HomeMainContent = () => {
             className={styles.search}
             onSearch={onSearch}
           />
-          <div>HowManyToShow</div>
+          {/* <div>How many to show</div> */}
         </div>
         {isLoadingAdvertisements ? (
           <Spin className={styles.spin} size="large"></Spin>
@@ -99,6 +96,7 @@ const HomeMainContent = () => {
                       userId={advertisement.user.id}
                       userName={advertisement.user.username}
                       userNumber={advertisement.user.contactNumber}
+                      imagesUrls={advertisement.presignedUrls}
                       daysAgo={advertisement.daysAgo}
                       showOptionButtons={showOptions}
                       refreshAdvertisementsFunction={() => handleRefresh()}

@@ -87,7 +87,7 @@ const AdvertisementInfoMainContent = () => {
           <div className={`${styles.columnContainer} ${styles.imageContainer}`}>
             <img
               className={styles.userImage}
-              src="https://bobbyhadz.com/images/blog/react-prevent-multiple-button-clicks/thumbnail.webp"
+              src={advertisement?.data?.imagesWithUid[0].url}
               alt="car"
             />
           </div>

@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -27,6 +28,8 @@ public class UserService implements UserDetailsService {
     private final CityRepository cityRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
+
+    private final S3Service s3Service;
 
     public List<UserEntity> findAll() {
         return userRepository.findAll();
@@ -40,11 +43,19 @@ public class UserService implements UserDetailsService {
     }
 
     public UserProfileResponse findUserById(Integer userId) throws NotFoundException {
-        return modelMapper.map(userRepository.findById(userId).orElseThrow(NotFoundException::new), UserProfileResponse.class);
+        UserProfileResponse response = modelMapper.map(userRepository.findById(userId).orElseThrow(NotFoundException::new), UserProfileResponse.class);
+        if (response.getImageUrl() != null) {
+            response.setImageUrl(s3Service.getFile(response.getImageUrl()));
+        }
+        return response;
     }
 
     public UserInfoResponse findUserInfoById(Integer userId) throws NotFoundException {
-        return modelMapper.map(userRepository.findById(userId).orElseThrow(NotFoundException::new), UserInfoResponse.class);
+        UserInfoResponse response = modelMapper.map(userRepository.findById(userId).orElseThrow(NotFoundException::new), UserInfoResponse.class);
+        if (response.getImageUrl() != null) {
+            response.setImageUrl(s3Service.getFile(response.getImageUrl()));
+        }
+        return response;
     }
 
     public UserProfileResponse editUserById(Integer userId, UserProfileRequest userProfileRequest) {
@@ -53,10 +64,14 @@ public class UserService implements UserDetailsService {
         userEntity.setLastName(userProfileRequest.getLastName());
         userEntity.setContactNumber(userProfileRequest.getContactNumber());
         userEntity.setAbout(userProfileRequest.getAbout());
-        //TODO maybe smarter?
         userEntity.setCity(cityRepository.getById(userProfileRequest.getCityId()));
+        if (userEntity.getImageUrl() == null && userProfileRequest.getUpdateImage()) {
+            userEntity.setImageUrl(UUID.randomUUID().toString());
+        }
         userEntity = userRepository.saveAndFlush(userEntity);
-        return modelMapper.map(userEntity, UserProfileResponse.class);
+        UserProfileResponse response = modelMapper.map(userEntity, UserProfileResponse.class);
+        response.setImageUrl(s3Service.uploadFile(response.getImageUrl()));
+        return response;
     }
 
     @Override

@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public class EditAdvertisementRequest extends CreateAdvertisementRequest{
     private Integer id;
+    private String[] imagesUid;
 }

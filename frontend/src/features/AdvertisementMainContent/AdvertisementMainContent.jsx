@@ -27,6 +27,7 @@ import {
   getAdvertisementById,
 } from "../../api/advertisementApi";
 import { useLocation } from "react-router";
+import { updateMultiplePicturesToS3 } from "../../api/s3BucketApi";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -34,8 +35,9 @@ const { TextArea } = Input;
 const formItemLayout = {
   labelCol: {
     xs: {
-      span: 22,
+      span: 18,
       offset: 2,
+      pull: 0,
     },
     sm: {
       span: 8,
@@ -43,11 +45,12 @@ const formItemLayout = {
   },
   wrapperCol: {
     xs: {
-      span: 22,
-      offset: 2,
+      span: 18,
+      offset: 0,
+      pull: 0,
     },
     sm: {
-      span: 22,
+      span: 20,
       offset: 2,
     },
   },
@@ -57,31 +60,131 @@ const getBase64 = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-
     reader.onload = () => resolve(reader.result);
-
     reader.onerror = (error) => reject(error);
   });
 
+const uploadButton = (
+  <div>
+    <PlusOutlined />
+    <div
+      style={{
+        marginTop: 8,
+      }}
+    >
+      Upload
+    </div>
+  </div>
+);
+
 const AdvertisementMainContent = () => {
-  //TODO upload images
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
-  const [previewTitle, setPreviewTitle] = useState("");
-  const [fileList, setFileList] = useState([
-    {
-      uid: "-1",
-      name: "image.png",
-      status: "done",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+  const [fileList, setFileList] = useState([]);
+  const [form] = Form.useForm();
+  const location = useLocation();
+  const [advertisementId, setAdvertisementId] = useState(
+    location?.state?.advertisementId
+  );
+
+  useEffect(() => {
+    if (!location?.state?.advertisementId) {
+      setAdvertisementId(null);
+    }
+  }, [location.state]);
+
+  useEffect(() => {
+    setFileList(advertisement?.data?.imagesWithUid);
+    if (advertisementId) {
+      form.setFieldsValue({
+        type: advertisement?.data?.type,
+        title: advertisement?.data?.title,
+        categoryId: advertisement?.data?.category?.id,
+        price: advertisement?.data?.price,
+        description: advertisement?.data?.description,
+      });
+    }
+  }, [advertisement]);
+
+  const { data: categories, isLoading: isLoadingCategories } = useQuery(
+    "categories",
+    findAllCategories
+  );
+
+  const { mutate: mutateCreateNewAdv } = useMutation(createNewAdvertisement, {
+    onSuccess: (data) => {
+      if (fileList.length > 0 && data.data.presignedUrls.length > 0) {
+        mutateUpdatePictures({
+          presignedUrls: data.data.presignedUrls,
+          imagesData: fileList.map((file) => file.originFileObj),
+        });
+      }
+      message.success("Uspješno ste dodali novi oglas");
     },
-    {
-      uid: "-2",
-      name: "image.png",
-      status: "done",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+    onError: () => {
+      message.error("Desila se greska");
     },
-  ]);
+  });
+
+  const { mutate: mutateModifyAdv } = useMutation(editAdvertisementById, {
+    onSuccess: (data) => {
+      if (fileList.length > 0 && data.data.presignedUrls.length > 0) {
+        mutateUpdatePictures({
+          presignedUrls: data.data.presignedUrls,
+          imagesData: fileList.map((file) => file.originFileObj),
+        });
+      }
+      refetch();
+      message.success("Uspješno ažurirali oglas");
+    },
+    onError: () => {
+      message.error("Desila se greska");
+    },
+  });
+
+  const { mutate: mutateUpdatePictures } = useMutation(
+    updateMultiplePicturesToS3,
+    {
+      onSuccess: (data) => {
+        refetch();
+        message.success("Uspješno ste postavili slike");
+      },
+      onError: () => {
+        message.error("Došlo je do greške prilikom postavljanja slika.");
+      },
+    }
+  );
+
+  const {
+    data: advertisement,
+    isLoading: isLoadingAdvertisement,
+    isRefetching: isRefetchingAdvertisement,
+    refetch,
+  } = useQuery(
+    ["advertisement", advertisementId],
+    () => getAdvertisementById(advertisementId),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+
+  const handleSumbitButton = () => {
+    form.validateFields().then(
+      () => {
+        let formData = form.getFieldsValue();
+        formData.numberOfImages = fileList.length;
+        if (advertisementId) {
+          formData.imagesUid = fileList.map((file) => file.uid);
+          mutateModifyAdv({ ...formData, id: advertisementId });
+        } else {
+          mutateCreateNewAdv(formData);
+        }
+      },
+      () => console.log("Nije uspio")
+    );
+  };
 
   const handleCancel = () => setPreviewVisible(false);
 
@@ -92,98 +195,14 @@ const AdvertisementMainContent = () => {
 
     setPreviewImage(file.url || file.preview);
     setPreviewVisible(true);
-    setPreviewTitle(
-      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
-    );
   };
-  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
 
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div
-        style={{
-          marginTop: 8,
-        }}
-      >
-        Upload
-      </div>
-    </div>
-  );
-  //TODO upload images
+  const handleChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
 
-  const [form] = Form.useForm();
-  const { data: categories, isLoading: isLoadingCategories } = useQuery(
-    "categories",
-    findAllCategories
-  );
-  const { mutate: mutateCreateNewAdv, isLoading } = useMutation(
-    createNewAdvertisement,
-    {
-      onSuccess: (data) => {
-        message.success("Uspješno ste dodali novi oglas");
-      },
-      onError: () => {
-        message.error("Desila se greska");
-      },
-    }
-  );
-
-  const { mutate: mutateModifyAdv, isLoading: modLod } = useMutation(
-    editAdvertisementById,
-    {
-      onSuccess: (data) => {
-        message.success("Uspješno ažurirali oglas");
-        form.setFieldsValue({
-          type: data?.data?.type,
-          title: data?.data?.title,
-          categoryId: data?.data?.category?.id,
-          price: data?.data?.price,
-          description: data?.data?.description,
-        });
-      },
-      onError: () => {
-        message.error("Desila se greska");
-      },
-    }
-  );
-
-  const location = useLocation();
-  const [advertisementId, setAdvertisementId] = useState(
-    location?.state?.advertisementId
-  );
-
-  useEffect(() => {
-    if (!location?.state?.advertisementId) {
-      setAdvertisementId(null);
-    }
-  }, [location]);
-
-  const {
-    data: advertisement,
-    isLoading: isLoadingAdvertisement,
-    isRefetching: isRefetchingAdvertisement,
-  } = useQuery(
-    ["advertisement", advertisementId],
-    () => getAdvertisementById(advertisementId),
-    {
-      refetchOnMount: "always",
-      refetchOnWindowFocus: "always",
-      refetchOnReconnect: "always",
-    }
-  );
-
-  const handleSumbitButton = () => {
-    form.validateFields().then(
-      () => {
-        if (advertisementId) {
-          mutateModifyAdv({ ...form.getFieldsValue(), id: advertisementId });
-        } else {
-          mutateCreateNewAdv(form.getFieldsValue());
-        }
-      },
-      () => console.log("Nije uspio")
-    );
+  const handleBefore = (file) => {
+    return false;
   };
 
   if (isLoadingAdvertisement || isRefetchingAdvertisement) {
@@ -192,7 +211,9 @@ const AdvertisementMainContent = () => {
 
   return (
     <div className={styles.mainContainer}>
-      <div className={styles.headerText}>Nova objava</div>
+      <div className={styles.headerText}>
+        {advertisementId ? "Ažuriranje objave" : "Nova objava"}
+      </div>
       <Form
         {...formItemLayout}
         layout={"vertical"}
@@ -278,18 +299,16 @@ const AdvertisementMainContent = () => {
             fileList={fileList}
             onPreview={handlePreview}
             onChange={handleChange}
+            beforeUpload={handleBefore}
           >
-            {fileList.length >= 5 ? null : uploadButton}
+            {fileList?.length >= 5 ? null : uploadButton}
           </Upload>
-          <Modal
-            visible={previewVisible}
-            title={previewTitle}
-            footer={null}
-            onCancel={handleCancel}
-          >
+          <Modal visible={previewVisible} footer={null} onCancel={handleCancel}>
             <img
               alt="example"
               style={{
+                paddingTop: "2rem",
+                height: "100%",
                 width: "100%",
               }}
               src={previewImage}
@@ -297,7 +316,7 @@ const AdvertisementMainContent = () => {
           </Modal>
         </Form.Item>
         <Form.Item className={styles.sumbitButtonForm}>
-          {advertisement ? (
+          {advertisementId ? (
             <Button
               type="primary"
               htmlType="submit"

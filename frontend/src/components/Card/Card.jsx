@@ -17,6 +17,7 @@ const Card = ({
   userName,
   userNumber,
   daysAgo,
+  imagesUrls,
   showOptionButtons = true,
   refreshAdvertisementsFunction,
 }) => {
@@ -59,7 +60,8 @@ const Card = ({
     <div className={styles.mainContainer} onClick={handleOnCardClick}>
       <img
         className={styles.imageContainer}
-        src="https://cdn.vox-cdn.com/thumbor/IneeXFCJM7YjxGrqgg5zJBmblHA=/0x0:3809x2857/1200x800/filters:focal(1601x1125:2209x1733)/cdn.vox-cdn.com/uploads/chorus_image/image/66274935/Workshop_0919-HS-40Something_Ask-studio_TommyCorner-1.0.0.jpg"
+        src={imagesUrls[0]}
+        alt="Slika"
       ></img>
       <div className={styles.contentContainer}>
         <div className={styles.title}>{title}</div>

@@ -2,6 +2,7 @@ import { Divider, Form, Radio, Select, Spin } from "antd";
 import React from "react";
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import { findAllCategories } from "../../api/categoriesApi";
 import { findAllCities } from "../../api/cityApi";
 import Button from "../../components/Button/Button";
@@ -14,7 +15,7 @@ import styles from "./HomeSideBar.module.css";
 const { Option } = Select;
 
 const HomeSideBar = ({ form, handleRefresh }) => {
-
+  const navigate = useNavigate();
   const loggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const { data: cities, isLoading: isLoadingCities } = useQuery(
@@ -52,6 +53,14 @@ const HomeSideBar = ({ form, handleRefresh }) => {
                 buttonStyle="solid"
               />
             </Form.Item>
+            <Button
+              text="Objavi novi oglas"
+              icon={<ion-icon name="add-circle-outline"></ion-icon>}
+              className={styles.createNewAdvButton}
+              onClick={() =>
+                navigate("/advertisement", { state: { advertisementId: null } })
+              }
+            ></Button>
             <Divider className={styles.divider} />
           </>
         )}

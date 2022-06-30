@@ -25,14 +25,7 @@ const HomeHeader = () => {
       <div className={styles.rowContainer}>
         {loggedIn ? (
           <>
-            <Button
-              text="Objavi"
-              icon={<ion-icon name="add-circle-outline"></ion-icon>}
-              className={styles.marginRight}
-              onClick={() =>
-                navigate("/advertisement", { state: { advertisementId: null } })
-              }
-            ></Button>
+           
             <Button
               text="Moj profil"
               icon={<ion-icon name="person-outline"></ion-icon>}
