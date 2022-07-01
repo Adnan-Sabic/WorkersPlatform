@@ -87,6 +87,21 @@ const AdvertisementMainContent = () => {
     location?.state?.advertisementId
   );
 
+  const {
+    data: advertisement,
+    isLoading: isLoadingAdvertisement,
+    isRefetching: isRefetchingAdvertisement,
+    refetch,
+  } = useQuery(
+    ["advertisement", advertisementId],
+    () => getAdvertisementById(advertisementId),
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    }
+  );
+
   useEffect(() => {
     if (!location?.state?.advertisementId) {
       setAdvertisementId(null);
@@ -152,21 +167,6 @@ const AdvertisementMainContent = () => {
       onError: () => {
         message.error("Došlo je do greške prilikom postavljanja slika.");
       },
-    }
-  );
-
-  const {
-    data: advertisement,
-    isLoading: isLoadingAdvertisement,
-    isRefetching: isRefetchingAdvertisement,
-    refetch,
-  } = useQuery(
-    ["advertisement", advertisementId],
-    () => getAdvertisementById(advertisementId),
-    {
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
     }
   );
 

@@ -6,13 +6,12 @@ services:
     image: platform-back
     restart: always
     ports:
-      - "10080:8080"
+      - "18080:8080"
     depends_on:
       - db
       - minio
 
   adminer:
-
     image: adminer
     restart: always
     ports:
@@ -21,7 +20,6 @@ services:
       - db
 
   db:
-
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
@@ -47,6 +45,13 @@ services:
       MINIO_ROOT_USER: workers-platform
       MINIO_ROOT_PASSWORD: workers-platform
 
+  platform-front:
+    image: platform-front
+    restart: always
+    depends_on:
+      - platform-back
+    ports:
+      - "13000:3000"
 
 volumes:
   platform-mysql-db:

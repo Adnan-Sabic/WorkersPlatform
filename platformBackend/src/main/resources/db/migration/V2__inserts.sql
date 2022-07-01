@@ -136,8 +136,8 @@ INSERT INTO `city` (name) VALUES ('Žepče');
 INSERT INTO `city` (name) VALUES ('Živinice');
 
 
-INSERT INTO `user` (`cityId`, `firstName`, `lastName`, `contactNumber`, `email`, `username`, `password`, `about`, `imageUrl`) VALUES ('1', 'Marko', 'Marković', '061222333', 'marko.markovic@gmail.com', 'MarkoM', '$2a$10$e0mCVwpwiigJ08CaH.fuwuTyLVsbxGnQ0u7AbiurGX9rId7x9ameW', 'Ja sam Marko volim raditi', 'https://yt3.ggpht.com/ytc/AKedOLTFonjbt3zMbyY3XlcSF1ahTGVeBPercEXgKbiJ=s900-c-k-c0x00ffffff-no-rj');
-INSERT INTO `user` (`cityId`, `firstName`, `lastName`, `contactNumber`, `email`, `username`, `password`, `about`, `imageUrl`) VALUES ('2', 'Petar', 'Petrović', '062445652', 'petar.petrovic@gmail.com', 'PetarP', '$2a$10$e0mCVwpwiigJ08CaH.fuwuTyLVsbxGnQ0u7AbiurGX9rId7x9ameW', 'Ja sam Petar volim raditi', 'https://yt3.ggpht.com/ytc/AKedOLTFonjbt3zMbyY3XlcSF1ahTGVeBPercEXgKbiJ=s900-c-k-c0x00ffffff-no-rj');
+INSERT INTO `user` (`cityId`, `firstName`, `lastName`, `contactNumber`, `email`, `username`, `password`, `about`, `imageUrl`) VALUES ('1', 'Marko', 'Marković', '061222333', 'marko.markovic@gmail.com', 'MarkoM', '$2a$10$e0mCVwpwiigJ08CaH.fuwuTyLVsbxGnQ0u7AbiurGX9rId7x9ameW', 'Ja sam Marko volim raditi', 'workerAvatar.jpg');
+INSERT INTO `user` (`cityId`, `firstName`, `lastName`, `contactNumber`, `email`, `username`, `password`, `about`, `imageUrl`) VALUES ('2', 'Petar', 'Petrović', '062445652', 'petar.petrovic@gmail.com', 'PetarP', '$2a$10$e0mCVwpwiigJ08CaH.fuwuTyLVsbxGnQ0u7AbiurGX9rId7x9ameW', 'Ja sam Petar volim raditi', 'workerAvatar.jpg');
 
 
 INSERT INTO `notification` (`userId`, `text`) VALUES ('1', 'Notifikacija 1');
@@ -164,13 +164,13 @@ INSERT INTO `category` (`name`) VALUES ('Građavinar');
 INSERT INTO `category` (`name`) VALUES ('Vrtlar');
 
 
-INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`, `price`) VALUES ('1', '2', 'OFFER', 'Molerske usluge', 'Radim povoljno molerske usluge na teritoriji grada Sarajevo. Samo stanovi. Broj: 062-333-232', '[\"url1\",\"url2\"]', '50');
-INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`) VALUES ('1', '10', 'OFFER', 'Kosim povoljno', 'Kosim povoljno na teritoriji Gornji Vakuf', '[\"url1\",\"url2\"]');
-INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`) VALUES ('1', '1', 'OFFER', 'Vodoinstalater 062-333-333', '20 godina iskustva u razmin domacinstvima.', '[\"url1\",\"url2\"]');
-INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`) VALUES ('1', '6', 'OFFER', 'Staklarske usluge Cazin', 'Od malih kucanskih staklenih proizvoda do velik prozora za zgrade', '[\"url1\",\"url2\"]');
-INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`, `price`) VALUES ('2', '1', 'DEMAND', 'Hitno potreban vodoinstalater', 'Kvar u kupatilu voda ne moze da stane! 065-668-954', '[\"url1\", \"url2\"]', '200');
-INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`) VALUES ('2', '3', 'DEMAND', 'Potreban električar', 'Potrebno mi je razvesti struju u novoj kući. Cijena po dogovoru', '[\"url1\", \"url2\"]');
-INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`) VALUES ('2', '5', 'DEMAND', 'Potreban kovač Konjic', 'Potreban mi je kovač da mi napravi mač sinu za rodjendan', '[\"url1\", \"url2\"]');
-INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`, `price`) VALUES ('2', '6', 'DEMAND', 'Potreban staklar Cazin', 'Potreban mi je staklar da mi napravi stalaže u frizideru.', '[\"url1\", \"url2\"]', '10');
+INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`, `price`) VALUES ('1', '2', 'OFFER', 'Molerske usluge', 'Radim povoljno molerske usluge na teritoriji grada Sarajevo. Samo stanovi. Broj: 062-333-232', '[\"defaultAdvertisement.jpg\"]', '50');
+INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`) VALUES ('1', '10', 'OFFER', 'Kosim povoljno', 'Kosim povoljno na teritoriji Gornji Vakuf', '[\"defaultAdvertisement.jpg\"]');
+INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`) VALUES ('1', '1', 'OFFER', 'Vodoinstalater 062-333-333', '20 godina iskustva u razmin domacinstvima.', '[\"defaultAdvertisement.jpg\"]');
+INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`) VALUES ('1', '6', 'OFFER', 'Staklarske usluge Cazin', 'Od malih kucanskih staklenih proizvoda do velik prozora za zgrade', '[\"defaultAdvertisement.jpg\"]');
+INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`, `price`) VALUES ('2', '1', 'DEMAND', 'Hitno potreban vodoinstalater', 'Kvar u kupatilu voda ne moze da stane! 065-668-954', '[\"defaultAdvertisement.jpg\"]', '200');
+INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`) VALUES ('2', '3', 'DEMAND', 'Potreban električar', 'Potrebno mi je razvesti struju u novoj kući. Cijena po dogovoru', '[\"defaultAdvertisement.jpg\"]');
+INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`) VALUES ('2', '5', 'DEMAND', 'Potreban kovač Konjic', 'Potreban mi je kovač da mi napravi mač sinu za rodjendan', '[\"defaultAdvertisement.jpg\"]');
+INSERT INTO `advertisement` (`userId`, `categoryId`, `type`, `title`, `description`, `imagesUrls`, `price`) VALUES ('2', '6', 'DEMAND', 'Potreban staklar Cazin', 'Potreban mi je staklar da mi napravi stalaže u frizideru.', '[\"defaultAdvertisement.jpg\"]', '10');
 
 

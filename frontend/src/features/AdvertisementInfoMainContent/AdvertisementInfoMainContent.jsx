@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { useLocation, useNavigate } from "react-router";
 import { getAdvertisementById } from "../../api/advertisementApi";
 import InfoField from "../../components/InfoField/InfoField";
+import SimpleImageSlider from "react-simple-image-slider";
 import { ADVERTISEMENT_TYPE_OPTIONS } from "../../constants";
 import styles from "./AdvertisementInfoMainContent.module.css";
 
@@ -20,14 +21,12 @@ const AdvertisementInfoMainContent = () => {
     return <Spin />;
   }
 
-  console.log("data", advertisement?.data);
-
   return (
     <div className={styles.mainContainer}>
       <div className={styles.columnContainer}>
         <div className={styles.aboutUser}>Informacije o oglasu</div>
         <div className={styles.rowContainer}>
-          <div className={styles.columnContainer}>
+          <div className={`${styles.columnContainer} ${styles.marginRight}`}>
             <InfoField
               label={"Naslov"}
               data={advertisement?.data?.title}
@@ -84,11 +83,15 @@ const AdvertisementInfoMainContent = () => {
               ></InfoField>
             </div>
           </div>
-          <div className={`${styles.columnContainer} ${styles.imageContainer}`}>
-            <img
-              className={styles.userImage}
-              src={advertisement?.data?.imagesWithUid[0].url}
-              alt="car"
+          <div className={styles.imageContainer}>
+            <SimpleImageSlider
+              width={"32rem"}
+              height={"25.6rem"}
+              images={advertisement?.data?.imagesWithUid.map(
+                (image) => image.url
+              )}
+              showBullets={true}
+              showNavs={true}
             />
           </div>
         </div>

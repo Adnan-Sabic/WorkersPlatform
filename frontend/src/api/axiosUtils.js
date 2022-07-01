@@ -1,9 +1,9 @@
 import axios from "axios";
-import { BACKEND_BASE_API, TOKEN_KEY } from "../constants";
+import { TOKEN_KEY } from "../constants";
 import { getFromLocalStorage } from "../util/localStorageUtil";
 
 export const client = axios.create({
-  baseURL: BACKEND_BASE_API,
+  baseURL: process.env.REACT_APP_BACKEND_BASE_API,
   headers: {
     "Content-type": "application/json",
   },

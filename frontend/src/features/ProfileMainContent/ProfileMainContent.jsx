@@ -28,16 +28,15 @@ const ProfileMainContent = () => {
   const [imageUrl, setImageUrl] = useState();
   const [imageData, setImageData] = useState();
   const [form] = Form.useForm();
-
-  useEffect(() => {
-    setImageUrl(user?.data?.imageUrl);
-  }, [user]);
-
   const {
     data: user,
     isLoading: isLoadingUser,
     refetch,
   } = useQuery(["user", userId], () => findUserById(userId));
+
+  useEffect(() => {
+    setImageUrl(user?.data?.imageUrl);
+  }, [user]);
 
   const { data: cities, isLoading: isLoadingCities } = useQuery(
     "cities",
@@ -47,7 +46,6 @@ const ProfileMainContent = () => {
   const { mutate, isLoading } = useMutation(editUserById, {
     onSuccess: (data) => {
       message.success("Uspješno ste ažurirali podatke na profilu");
-      console.log(imageData);
       if (imageData && data.data.imageUrl) {
         mutateSendPicture({
           presignedUrl: data.data.imageUrl,

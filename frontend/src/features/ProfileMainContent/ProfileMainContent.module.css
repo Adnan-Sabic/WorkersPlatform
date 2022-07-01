@@ -49,7 +49,7 @@
 .uploadImage {
     height: 20rem;
     width: 100%;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .uploadButton {

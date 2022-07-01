@@ -9,7 +9,6 @@ export const updateMultiplePicturesToS3 = ({ presignedUrls, imagesData }) => {
   imagesData = imagesData.filter(Boolean);
   for (let i = 0; i < presignedUrls.length; i++) {
     promises.push(axios.put(presignedUrls[i], imagesData[i]));
-    console.log("asdad");
   }
   return Promise.all(promises);
 };

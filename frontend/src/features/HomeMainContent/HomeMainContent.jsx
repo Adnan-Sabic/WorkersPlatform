@@ -39,7 +39,6 @@ const HomeMainContent = () => {
   }, []);
 
   const handleRefresh = () => {
-    console.log("HANDLE REFRESH", filterForm.getFieldsValue());
     setFilter(filterForm.getFieldsValue());
     refetch();
   };
@@ -63,7 +62,6 @@ const HomeMainContent = () => {
       ></HomeSideBar>
       <div className={styles.contentContainer}>
         <div className={styles.header}>
-          <div>SortBy</div>
           <Search
             placeholder="Pretraga..."
             enterButton="Pretraži"
