@@ -39,7 +39,7 @@ spring:
 aws:
   access-key: workers-platform
   secret-key: workers-platform
-  host: http://minio:9000
+  host: http://localhost:11000
   region: US_EAST_1
   bucket-name: workers
   link-duration: 1h

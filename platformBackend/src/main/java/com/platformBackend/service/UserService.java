@@ -64,7 +64,9 @@ public class UserService implements UserDetailsService {
         userEntity.setLastName(userProfileRequest.getLastName());
         userEntity.setContactNumber(userProfileRequest.getContactNumber());
         userEntity.setAbout(userProfileRequest.getAbout());
-        userEntity.setCity(cityRepository.getById(userProfileRequest.getCityId()));
+        if(userProfileRequest.getCityId() != null) {
+            userEntity.setCity(cityRepository.getById(userProfileRequest.getCityId()));
+        }
         if (userEntity.getImageUrl() == null && userProfileRequest.getUpdateImage()) {
             userEntity.setImageUrl(UUID.randomUUID().toString());
         }

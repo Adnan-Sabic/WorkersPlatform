@@ -118,7 +118,7 @@ const ProfileMainContent = () => {
           firstName: user?.data?.firstName,
           lastName: user?.data?.lastName,
           categoryId: user?.data?.categoryId,
-          cityId: user?.data?.city?.id,
+          cityId: user?.data?.city?.id || null,
           contactNumber: user?.data?.contactNumber,
           about: user?.data?.about,
         }}

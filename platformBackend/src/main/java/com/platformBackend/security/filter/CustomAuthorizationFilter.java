@@ -54,7 +54,6 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
         } catch (Exception e) {
             System.out.println(e);
-            throw new UnsupportedOperationException();
         }
         filterChain.doFilter(request, response);
     }

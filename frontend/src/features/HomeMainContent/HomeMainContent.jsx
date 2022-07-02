@@ -111,7 +111,7 @@ const HomeMainContent = () => {
             <Pagination
               className={styles.paginator}
               total={advertisements?.data?.totalElements}
-              pageSize={advertisements?.data?.size}
+              pageSize={advertisements?.data?.size || 0}
               onChange={onPageChange}
             />
           </>

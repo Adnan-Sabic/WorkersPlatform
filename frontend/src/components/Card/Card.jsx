@@ -1,4 +1,4 @@
-import { Button, message } from "antd";
+import { Button, message, Popconfirm } from "antd";
 import React from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router";
@@ -32,11 +32,6 @@ const Card = ({
     },
   });
 
-  const handleDeleteButton = (e) => {
-    e.stopPropagation();
-    mutate(id);
-  };
-
   const handleModifyButton = (e) => {
     e.stopPropagation();
     navigate("/advertisement", { state: { advertisementId: id } });
@@ -54,6 +49,11 @@ const Card = ({
         daysAgo: daysAgo,
       },
     });
+  };
+
+  const confirmDelete = (e) => {
+    e.stopPropagation();
+    mutate(id);
   };
 
   return (
@@ -91,14 +91,22 @@ const Card = ({
               >
                 Izmjeni
               </Button>
-              <Button
-                className={styles.deleteButton}
-                type="primary"
-                danger
-                onClick={handleDeleteButton}
+              <Popconfirm
+                placement="top"
+                title={"Da li ste sigurni da želite obrisati oglas?"}
+                onConfirm={confirmDelete}
+                okText="Da"
+                cancelText="Ne"
               >
-                Obrisi
-              </Button>
+                <Button
+                  className={styles.deleteButton}
+                  type="primary"
+                  danger
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Obriši
+                </Button>
+              </Popconfirm>
             </>
           ) : (
             <>
