@@ -1,18 +1,17 @@
 Razvijanje sistema za lakše uspostavljanje komunikacije, dogovaranje poslova
 između ljudi koji nude određene usluge (izdavači usluga, npr zanatlije) i potražioca usluga (npr čovjek koji traži vodoinstalatera).
-Početna stranica bi se sastojala od prijave/registracije od koje dalje ovisi izgled aplikacije.
-Potražioci usluga bi imali aplikaciju u kojoj mogu postaviti svoje zahtjeve,
-vidjeti dostupne izdavače usluga(detaljnje informacije o njima: profil, dojmove, završene poslove...),
-filtrirati ih (određene kategorije npr vodoinstalateri, električari...),
-poslati im poruku, ostaviti dojam nakon završenog posla, uređivati svoj profil...
-Izdavači usluga bi imali opcije pregleda svih zahtjeva, mogućnost njihove pretrage, filtriranja,
-slanje poruke potražiocu usluga...
+Početna stranica bi se sastojala od prijave/registracije, liste trenutnih oglasa, niz filtera, pretrage.
+Dodatni klik na oglas nas vodi na detaljne informacije o samom oglasu, a klick na korisnika detaljne informacije o korisniku.
+Prijavljeni korisnik bi imao dodatne opcije kao npr da napravi ponudu sa slikama uredi svoj profil uredjuje svoje napravljene ponude.
 
-Rezimirano, aplikacija slična današnjem olx-u čija se funkcionalnost fokusira
-na lakše ugovaranje poslova između potražioca i izdavača usluga.
+Rezimirano, aplikacija slična današnjem olx-u čija se funkcionalnost fokusira na lakše ugovaranje poslova između potražioca i izdavača usluga.
 
 
-Tehnicke stvari:
-Baza: MongoDB
-Backend: Spring boot
-Frontend: React
+Prilikom razvijanja aplikacije vodilo se racuna da se lako mogu dodati nove funkcionalnosti:
+Chat(u bazi vec postoji tabela sa testnim podacima)
+Admin racun(user tabela vec sadrzi kolonu ROLE a backend vec ima podrsku za ROLE preko spring security-ja)
+Teme aplikacije(prilikom koristenja boja koristile su se css variable lako ih mozemo zamijeniti)
+...
+
+
+Backend razvijen na dvije baze mongodb i mySQL (migracija na MySQL zbog odredjenih pogodnosti prilikom koristenja spring-boot-a)
