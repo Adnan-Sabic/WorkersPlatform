@@ -52,7 +52,7 @@ const UserInfoMainContent = () => {
             textArea
           ></InfoField>
         </div>
-        <div
+        {/* <div
           className={`${styles.rowContainer} ${styles.sendMessageButtonContainer}`}
         >
           {loggedIn && (
@@ -60,7 +60,7 @@ const UserInfoMainContent = () => {
               Pošalji poruku
             </Button>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

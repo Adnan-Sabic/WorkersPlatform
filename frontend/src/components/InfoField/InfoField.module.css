@@ -49,6 +49,16 @@
 
 @media screen and (max-width: 1500px) {
     .mainContainer {
-        width: 31rem;
+        width: 34.15rem;
     }
-  }
+
+    .maxHeight {
+        inline-size: 66.15rem;
+    }
+}
+
+@media screen and (max-width: 1090px) {
+    .maxHeight {
+        inline-size: 32.15rem;
+    }
+}

@@ -126,19 +126,19 @@ const ProfileMainContent = () => {
       >
         <Row justify="center" align="middle">
           <Col span={8} xs={22} sm={22} md={16} xl={8} xxl={8}>
-            <Col span={22}>
+            <Col span={22} xs={24} sm={24} md={24} xl={22}>
               <Form.Item label="Korisničko ime" name="username">
                 <Input disabled />
               </Form.Item>
             </Col>
-            <Col span={22}>
+            <Col span={22} xs={24} sm={24} md={24} xl={22}>
               <Form.Item label="Email" name="email">
                 <Input disabled />
               </Form.Item>
             </Col>
 
             <Row gutter={[16, 0]}>
-              <Col span={11}>
+              <Col span={22} xs={24} sm={12} md={12} xl={11}>
                 <Form.Item
                   label="Ime"
                   name="firstName"
@@ -147,7 +147,7 @@ const ProfileMainContent = () => {
                   <Input />
                 </Form.Item>
               </Col>
-              <Col span={11}>
+              <Col span={22} xs={24} sm={12} md={12} xl={11}>
                 <Form.Item
                   label="Prezime"
                   name="lastName"
@@ -159,7 +159,7 @@ const ProfileMainContent = () => {
             </Row>
 
             <Row gutter={[16, 0]}>
-              <Col span={11}>
+              <Col span={22} xs={24} sm={12} md={12} xl={11}>
                 <Form.Item
                   label="Broj telefona"
                   name="contactNumber"
@@ -168,7 +168,7 @@ const ProfileMainContent = () => {
                   <Input />
                 </Form.Item>
               </Col>
-              <Col span={11}>
+              <Col span={22} xs={24} sm={12} md={12} xl={11}>
                 <Form.Item label="Grad" name="cityId">
                   <Select
                     allowClear
@@ -220,7 +220,7 @@ const ProfileMainContent = () => {
           </Col>
         </Row>
         <Row justify="center">
-          <Col span={12} xs={22} sm={12} md={16}>
+          <Col span={4} xs={22} sm={22} md={16} xl={16} xxl={16}>
             <Form.Item label="Detaljnije o Vama" name="about">
               <TextArea
                 className={styles.aboutTextArea}
@@ -231,7 +231,7 @@ const ProfileMainContent = () => {
           </Col>
         </Row>
         <Row justify="center" align="middle">
-          <Col span={4} offset={8} xs={14} sm={4} md={8}>
+          <Col span={4} offset={8} xs={14} sm={14} md={8}>
             <Form.Item className={styles.sumbitButtonForm}>
               <Button
                 type="primary"

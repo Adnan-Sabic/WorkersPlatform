@@ -43,6 +43,8 @@
     box-shadow: #0075B7 0px 0px 0px 3px;
     height: 100%;
     width: 35%;
+    /* height: 12rem;
+    width: 22rem; */
     object-fit: fill;
     border-radius: 1rem;
 }
@@ -143,3 +145,25 @@
 .userLink:hover::before {
     transform: scaleX(1);
   }
+
+  
+@media screen and (max-width: 650px) {
+    .contentContainer {
+        margin-left: 1.5rem;
+    }
+    
+    .title {
+        line-height: 1.1rem;
+        font-size: 0.9rem;
+    }
+    .typeOffer, .typeDemand, .category, .price, .userName, .userLink {
+        font-size: 0.8rem;
+    }
+
+    .creationDate {
+        font-size: 0.6rem;
+    }
+    .rowContainer {
+        margin-top: 0px;
+    }
+}

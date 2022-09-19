@@ -90,4 +90,17 @@
         overflow-y: auto;
         
     }
+    .search {
+        width: 96%;
+    }
   }
+
+  @media screen and (max-width: 650px) {
+    .mainContainer {
+        display: block;
+        flex-direction: column;
+    }
+    .search {
+        width: 90%;
+    }
+}

@@ -58,3 +58,31 @@
     padding: 1rem;
 }
 
+@media screen and (max-width: 1500px) {
+
+}
+
+@media screen and (max-width: 1090px) {
+    .sendMessageButtonContainer {
+        width: 34.15rem;
+        justify-content: end;
+    }
+
+    .sendMessageButton {
+        width: 100%;
+    }
+
+    .columnContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .rowContainer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+

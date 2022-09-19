@@ -35,8 +35,8 @@
     .mainContainer {
         display: flex;
         justify-content: space-around;
-        flex-direction: column;
-        min-height: 20rem;
+        flex-direction: column;        
+        min-height: 15rem;
     }
     .rowContainer {
         width: 100%;
