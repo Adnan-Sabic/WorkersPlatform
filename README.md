@@ -13,6 +13,7 @@ Technical aspects
 
 How to start the application
 All services of the platform are dockerized. To start the platform locally you need to have Docker installed.
+
     1.	Clone the git repository locally
     2.	Position yourself into the folder platformBackend with some CLI (gitBash, cmd, openShell) and execute this commands
         1.	mvn clean package
