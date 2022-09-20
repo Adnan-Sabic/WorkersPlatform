@@ -4,6 +4,8 @@ Description
 Workers platform is a vertical C2C online marketplace which function is to connect seekers and service providers. Users can use the workers platform unauthenticated to see available offers and demands and filter them, but have the option to sing up and get more functionalities like creating an offer or demand, updating profile and so on.
 
 Technical aspects
+
+![Alt text](https://raw.githubusercontent.com/Adnan-Sabic/WorkersPlatform/migrate-to-MySQL/ArhitectureWorkersPlatform.png?token=GHSAT0AAAAAABZAAUBACPPSNUIYT343VKAKYZJ6N4Q "Optional title")
  
     •	MySQL is the database used for keeping all data about users, advertisements, categories, cities…
     •	MinIO is a S3 object storage used to store users profile pictures and advertisements pictures.
